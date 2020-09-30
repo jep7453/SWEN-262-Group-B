@@ -18,7 +18,6 @@ public class LMBS
     public static void main(String[] args) throws IOException {
         Library library = new Library();
 
-        ArrayList<Book> bookStore = library.getBookStore();
         System.out.println("Library Book Managment System\nPlease enter a command:");
         while(true) {
             Scanner input = new Scanner(System.in);
@@ -28,7 +27,6 @@ public class LMBS
             command.execute();
             System.out.println();
         }
-
     }
 
 
