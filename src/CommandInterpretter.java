@@ -14,6 +14,9 @@ public class CommandInterpretter {
             case "register":
                command = new RegisterVisitor(parts[1],parts[2],parts[3],parts[4]);
                return command;
+            case "report":
+                command = new LibraryReport();
+                return command;
             default:
                 return null;
         }
