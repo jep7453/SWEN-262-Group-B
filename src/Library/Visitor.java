@@ -1,5 +1,4 @@
 package Library;
-
 public class Visitor {
 
     private static String firstName;
@@ -8,12 +7,12 @@ public class Visitor {
     private static String phoneNumber;
     private static int visitorID;
 
-    public Visitor(String firstName, String lastName, String address, String phoneNumber) {
+    public Visitor(String firstName, String lastName, String address, String phoneNumber, int id) {
         this.firstName=firstName;
         this.lastName=lastName;
         this.address=address;
         this.phoneNumber=phoneNumber;
-        this.visitorID=1000000000+Library.visitorsLength();
+        this.visitorID=id;
     }
 
     public int getVisitorID(){
