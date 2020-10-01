@@ -9,14 +9,12 @@ public class RegisterVisitor implements Command {
 
     private Visitor visitor;
 
-
-
     public RegisterVisitor(String firstName,String lastName,String address,String phoneNumber) {
         visitor = new Visitor(firstName,lastName,address,phoneNumber);
     }
 
     public void execute() {
-        ArrayList<Visitor> visitors = Library.getVisitors();
+        ArrayList<Visitor> visitors = Library.getRegisteredVisitors();
         visitors.add(visitor);
         System.out.println("register,"+String.valueOf(visitor.getVisitorID())+ ",September 26th 2020");
         }
