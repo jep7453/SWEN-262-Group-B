@@ -49,7 +49,7 @@ public class Book {
 
     @Override
     public String toString() {
-        String book = ISBN + "," + title + "," + authors + "," + publisher + "," + date + "," + pages + "\n";
+        String book = ISBN + "," + title + "," + authors + "," + publisher + "," + date + "," + pages;
         return book;
     }
 

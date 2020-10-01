@@ -8,11 +8,11 @@ import java.util.ArrayList;
 public class PurchaseBook implements Command {
 
     private int quantity;
-    private ArrayList<String> books;
+    private ArrayList<Integer> books;
     private Library library;
 
 
-    public PurchaseBook(Library library, int quantity, ArrayList<String> books) {
+    public PurchaseBook(Library library, int quantity, ArrayList<Integer> books) {
         this.quantity = quantity;
         this.books = books;
         this.library=library;
@@ -20,17 +20,18 @@ public class PurchaseBook implements Command {
 
     public void execute() {
         ArrayList<Book> bookLibrary = library.getBooks();
-        ArrayList<Book> bookStore = library.getBookStore();
-        for(String book : books) {
-            for(Book storeBook : bookStore) {
-                if (storeBook.getISBN().equals(book)) {
-                    storeBook.addCopies(quantity);
-                    if(!bookLibrary.contains(storeBook)) {
-                        bookLibrary.add(storeBook);
-                    }
+        ArrayList<Book> bookStore = library.getStoreSearch();
+        ArrayList<Book> purchased= new ArrayList<Book>();
+        for(Integer book : books) {
+            Book storeBook= bookStore.get(book-1);
+            purchased.add(storeBook);
+            storeBook.addCopies(quantity);
+            if(!bookLibrary.contains(storeBook)) {
+                bookLibrary.add(storeBook);
                 }
             }
-
-        }
+        System.out.println("purchase,success,"+purchased.size());
+        for(Book purchasedBook: purchased)
+            System.out.println(purchasedBook+","+ String.valueOf(quantity));
     }
 }

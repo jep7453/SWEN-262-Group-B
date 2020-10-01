@@ -12,12 +12,14 @@ public class Library {
     private ArrayList<Visitor> visitors;
     private ArrayList<Book> bookStore;
     private ArrayList<Book> books;
+    private ArrayList<Book> storeSearch;
 
 
     public Library() throws IOException {
         this.visitors= new ArrayList<>();
         this.bookStore = new ArrayList<>();
         this.books = new ArrayList<>();
+        this.storeSearch = new ArrayList<>();
         BufferedReader books = new BufferedReader(new FileReader("src/books.txt"));
         String book;
         while ((book = books.readLine()) != null)
@@ -85,6 +87,14 @@ public class Library {
 
     public ArrayList<Book> getBookStore() {
         return bookStore;
+    }
+
+    public ArrayList<Book> getStoreSearch() {
+        return storeSearch;
+    }
+
+    public void setStoreSearch(ArrayList<Book> searchResults) {
+        storeSearch=searchResults;
     }
 
     public ArrayList<Book> getBooks() {
