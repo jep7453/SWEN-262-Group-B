@@ -55,6 +55,10 @@ public class Book {
         copiesAvailable+=amount;
     }
 
+    public int getCopiesAvailable() {
+        return copiesAvailable;
+    }
+
     @Override
     public String toString() {
         String book = ISBN + "," + title + "," + getAuthorsString() + "," + publisher + "," + date + "," + pages;
