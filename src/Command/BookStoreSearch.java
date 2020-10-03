@@ -27,7 +27,8 @@ import java.util.ArrayList;
                             if(!parameter.equals(book.getTitle())) {
                                 valid=false; }
                         if(parameterNum==1)
-                            if(!parameter.equals(book.getAuthors())) {
+                            if(!parameter.equals(book.getAuthorsString())) {
+                                String lol = book.getAuthorsString();
                                 valid=false; }
                         if(parameterNum==2)
                             if(!parameter.equals(book.getISBN())) {

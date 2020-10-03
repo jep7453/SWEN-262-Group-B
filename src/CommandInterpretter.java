@@ -31,9 +31,30 @@ public class CommandInterpretter {
             case "search":
                 ArrayList<String> search = new ArrayList<>();
                 iter = 0;
+                String authors = "";
+                boolean inAuthors = false;
                 for(String part: parts) {
                     if(iter>0) {
-                        search.add(part);
+                        if(part.charAt(0)==('{')) {
+                            authors = part.substring(1);
+                            if(part.charAt(part.length()-1)!=('}'))
+                                inAuthors = true;
+                            else
+                                search.add(part);
+                        }
+                        else if(inAuthors) {
+                            if(part.charAt(part.length()-1)!=('}')) {
+                                authors=authors + part;
+                            }
+                            else {
+                                authors=authors + part.substring(0,part.length()-2);
+                                inAuthors=false;
+                                search.add(authors);
+                            }
+
+                        }
+                        else
+                            search.add(part);
                     }
                     iter++;
                 }

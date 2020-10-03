@@ -42,6 +42,14 @@ public class Book {
 
     public ArrayList<String> getAuthors() { return authors;}
 
+    public String getAuthorsString() {
+        String authorsString = "";
+        for(String author:authors) {
+            authorsString = authorsString + author;
+        }
+        return "{"+ authorsString + "}";
+    }
+
     public void addCopies(int amount) {
         copies+=amount;
         copiesAvailable+=amount;
@@ -49,7 +57,7 @@ public class Book {
 
     @Override
     public String toString() {
-        String book = ISBN + "," + title + "," + authors + "," + publisher + "," + date + "," + pages;
+        String book = ISBN + "," + title + "," + getAuthorsString() + "," + publisher + "," + date + "," + pages;
         return book;
     }
 
