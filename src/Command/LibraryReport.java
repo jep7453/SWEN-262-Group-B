@@ -1,13 +1,10 @@
 package Command;
-import Library.Visitor;
+
 import Library.Library;
 
 public class LibraryReport implements Command {
+
     private Library currentLibrary;
-    private int bookCount;
-    private int bankAccount;
-    private int visitorCount;
-    private int averageTimeSpent;//implementation later
 
     public LibraryReport(Library library){
         currentLibrary = library;
@@ -16,19 +13,22 @@ public class LibraryReport implements Command {
     private String getVisitorString(){
        return "Visitor Count: " + currentLibrary.visitorsLength() + '\n';
     }
-    /*
     private String getBookString(){
         return "Book Count: " + currentLibrary.getTotalBookCount() + '\n';
     }
-
-     */
     private String getBankString(){return "Money: " + currentLibrary.getTotalBankAccount() + '\n';}
+    private String getRentedString(){return "Amount of Rented Books: " +
+            currentLibrary.getRentedBooks().size() + '\n';}
+    private String getCollectionString(){return "Current Collection Size: " +
+            currentLibrary.getBookCollection().size() + '\n';}
 
     public void execute(){
         String reportString = "";
-        reportString = getVisitorString();
-        //reportString = getBookString();
-        //reportString = getBankString();
+        reportString = reportString + getVisitorString();
+        reportString = reportString + getBookString();
+        reportString = reportString + getBankString();
+        reportString = reportString + getRentedString();
+        reportString = reportString + getCollectionString();
         System.out.println(reportString);
     }
 }
