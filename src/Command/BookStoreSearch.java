@@ -18,6 +18,7 @@ import java.util.ArrayList;
         public void execute() {
             ArrayList<Book> bookLibrary = library.getBookStore();
             ArrayList<Book> searchResults = new ArrayList<Book>();
+            SortStrategy strategy = null;
             for(Book book:bookLibrary) {
                 Boolean valid = true;
                 int parameterNum = 0;
@@ -28,7 +29,6 @@ import java.util.ArrayList;
                                 valid=false; }
                         if(parameterNum==1)
                             if(!parameter.equals(book.getAuthorsString())) {
-                                String lol = book.getAuthorsString();
                                 valid=false; }
                         if(parameterNum==2)
                             if(!parameter.equals(book.getISBN())) {
@@ -39,12 +39,20 @@ import java.util.ArrayList;
                         if(parameterNum==3)
                             if(!parameter.equals(book.getPublisher())) {
                                 valid=false; }
+                        if(parameterNum==4 && strategy==null) {
+                            if(parameter.equals("title"))
+                                strategy = new TitleSort();
+                            if(parameter.equals("publish-date"))
+                                strategy = new DateSort();
+                        }
                     }
                     parameterNum++;
                 }
                 if(valid) {
                     searchResults.add(book);
                 }
+                if(strategy!=null)
+                    searchResults = strategy.sort(searchResults);
             }
             library.setStoreSearch(searchResults);
             System.out.println("search,"+searchResults.size());

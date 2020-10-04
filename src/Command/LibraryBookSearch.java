@@ -18,6 +18,7 @@ public class LibraryBookSearch implements Command {
     public void execute() {
         ArrayList<Book> bookLibrary = library.getBooks();
         ArrayList<Book> searchResults = new ArrayList<Book>();
+        SortStrategy strategy = null;
         for(Book book:bookLibrary) {
             Boolean valid = true;
             int parameterNum = 0;
@@ -39,12 +40,22 @@ public class LibraryBookSearch implements Command {
                     if(parameterNum==3)
                         if(!parameter.equals(book.getPublisher())) {
                             valid=false; }
+                    if(parameterNum==4 && strategy==null) {
+                        if (parameter.equals("title"))
+                            strategy = new TitleSort();
+                        if (parameter.equals("publish-date"))
+                            strategy = new DateSort();
+                        if (parameter.equals("book-status"))
+                            strategy = new StatusSort();
+                    }
                 }
                 parameterNum++;
             }
             if(valid) {
                 searchResults.add(book);
             }
+            if(strategy!=null)
+                searchResults = strategy.sort(searchResults);
         }
         library.setStoreSearch(searchResults);
         System.out.println("info,"+searchResults.size());
