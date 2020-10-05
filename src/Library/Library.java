@@ -1,10 +1,6 @@
 package Library;
 
-
 import java.util.*;
-
-import Command.Time;
-
 
 public class Library {
 
@@ -46,6 +42,51 @@ public class Library {
         this.rentedBooks.remove(book.getTitle());
         this.bookCollection.put(book.getTitle(), book);
     }
+    public void fillBookStore(String bookString) {
+        String[] bookSections = bookString.split(",");
+        int index =0;
+        int checkIndex =2;
+        String ISBN = bookSections[index];
+        index++;
+        String nextSection = bookSections[index];
+        String title = "";
+        while(nextSection.charAt(nextSection.length()-1)!='"') {
+            title += nextSection+ ",";
+            index++;
+            checkIndex++;
+            nextSection = bookSections[index];
+        }
+        title +=nextSection;
+        index++;
+        ArrayList<String> authors = new ArrayList<>();
+        nextSection = bookSections[index];
+        while(nextSection.charAt(nextSection.length()-1)!=('}')) {
+            if(index==checkIndex)
+                authors.add(nextSection.substring(1));
+            else
+                authors.add(nextSection);
+            index++;
+            nextSection = bookSections[index];
+        }
+        if(index==checkIndex)
+            authors.add(nextSection.substring(1,nextSection.length()-1));
+        else
+            authors.add(nextSection.substring(0,nextSection.length()-1));
+        index++;
+        nextSection = bookSections[index];
+        String publisher = "";
+        while(nextSection.charAt(nextSection.length()-1)!='"') {
+            publisher += nextSection;
+            index++;
+            nextSection = bookSections[index];
+        }
+        publisher += nextSection;
+        String date = bookSections[index+1];
+        int pages = Integer.valueOf(bookSections[index+2]);
+        Book book = new Book(title, authors, ISBN, publisher, date, pages);
+        bookStore.add(book);
+    }
+
 
     public HashMap<String, Book> getRentedBooks(){return this.rentedBooks;}
     public HashMap<String, Book> getBookCollection(){return this.bookCollection;}
