@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class CommandInterpretter {
 
 
-    public CommandInterpretter() {
+    public CommandInterpretter() { }
 
     }
 
@@ -91,6 +91,14 @@ public class CommandInterpretter {
                     iter++;
                 }
                 command = new LibraryBookSearch(library,info);
+                return command;
+            case "report":
+                command = new LibraryReport(library);
+                return command;
+            case "advance":
+                GregorianCalendar calendar = new GregorianCalendar();
+                calendar.setTime(new Date());
+                command = new Time(calendar,parts[1],library);
                 return command;
             default:
                 return null;

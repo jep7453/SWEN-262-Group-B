@@ -12,4 +12,8 @@ public class DateSort implements SortStrategy {
         Collections.sort(books,Collections.reverseOrder(Comparator.comparing(Book::getDate)));
         return books;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> zuri-dev

@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.*;
 
 public class Library {
 
@@ -13,10 +14,26 @@ public class Library {
     private ArrayList<Book> bookStore;
     private ArrayList<Book> books;
     private ArrayList<Book> storeSearch;
+    private static ArrayList<Visitor> registeredVisitors;
+    private int totalBookCount;
+    private int totalVisitorCount;
+    public int totalBankAccount;
+    private HashMap<String, Book> bookCollection;
+    private HashMap<String,Book> rentedBooks;
+    private GregorianCalendar presentDate;
+
 
 
     public Library() throws IOException {
-        this.visitors= new ArrayList<>();
+
+            this.registeredVisitors = new ArrayList<>();
+            this.totalBankAccount = 0;
+            this.totalBookCount = 0;
+            this.totalVisitorCount = 0;
+            this.bookCollection = new HashMap<>();
+            this.rentedBooks = new HashMap<>();
+            this.presentDate = new GregorianCalendar();
+            presentDate.setTime(new Date());
         this.bookStore = new ArrayList<>();
         this.books = new ArrayList<>();
         this.storeSearch = new ArrayList<>();
@@ -26,16 +43,28 @@ public class Library {
             this.fillBookStore(book);
     }
 
-    public int visitorsLength() {
-        if(visitors==null)
+    public static int visitorsLength() {
+        if(registeredVisitors ==null)
             return 0;
-        return visitors.size();
+        return registeredVisitors.size();
     }
 
-    public ArrayList<Visitor> getVisitors(){
+    public void checkoutBook(Book book){
+        GregorianCalendar returnDate = new GregorianCalendar();
+        returnDate.setTime(new Date());
+        returnDate.set(Calendar.MONTH, returnDate.get(Calendar.MONTH) + 1);//for now just set the return date for 1 month in advance
+        book.setReturnDate(returnDate);
+        this.bookCollection.remove(book.getTitle());
+        this.rentedBooks.put(book.getTitle(), book);
+    }
+    public void returnBook(Book book) {
+        book.setReturnDate(null);
+        this.rentedBooks.remove(book.getTitle());
+        this.bookCollection.put(book.getTitle(), book);
+    }
+    public ArrayList<Visitor> getVisitors() {
         return visitors;
     }
-
     public void addBook(Book book) {
         books.add(book);
     }
@@ -100,4 +129,15 @@ public class Library {
     public ArrayList<Book> getBooks() {
         return books;
     }
+
+    public HashMap<String, Book> getRentedBooks(){return this.rentedBooks;}
+    public HashMap<String, Book> getBookCollection(){return this.bookCollection;}
+    public GregorianCalendar getPresentDate(){return this.presentDate;}
+    public int getTotalBookCount(){return this.bookCollection.size();}
+    public int getTotalBankAccount(){return totalBankAccount;}
+    public static ArrayList<Visitor> getRegisteredVisitors(){
+        return registeredVisitors;
+    }
+    public Object clone() throws CloneNotSupportedException{ return super.clone(); }
+
 }
