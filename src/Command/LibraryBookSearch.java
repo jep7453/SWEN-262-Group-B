@@ -16,7 +16,7 @@ public class LibraryBookSearch implements Command {
     }
 
     public void execute() {
-        ArrayList<Book> bookLibrary = library.getBooks();
+        ArrayList<Book> bookLibrary = new ArrayList<>(library.getBookCollection().values());
         ArrayList<Book> searchResults = new ArrayList<Book>();
         SortStrategy strategy = null;
         for(Book book:bookLibrary) {

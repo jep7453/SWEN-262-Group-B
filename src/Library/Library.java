@@ -1,18 +1,13 @@
 package Library;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.*;
 
-public class Library {
+public class Library implements Cloneable{
 
-    private ArrayList<Visitor> visitors;
-    private ArrayList<Book> bookStore;
-    private ArrayList<Book> books;
     private ArrayList<Book> storeSearch;
     private static ArrayList<Visitor> registeredVisitors;
     private int totalBookCount;
@@ -22,21 +17,15 @@ public class Library {
     private HashMap<String,Book> rentedBooks;
     private GregorianCalendar presentDate;
 
-
-
     public Library() throws IOException {
-
-            this.registeredVisitors = new ArrayList<>();
-            this.totalBankAccount = 0;
-            this.totalBookCount = 0;
-            this.totalVisitorCount = 0;
-            this.bookCollection = new HashMap<>();
-            this.rentedBooks = new HashMap<>();
-            this.presentDate = new GregorianCalendar();
-            presentDate.setTime(new Date());
-        this.bookStore = new ArrayList<>();
-        this.books = new ArrayList<>();
-        this.storeSearch = new ArrayList<>();
+        this.registeredVisitors = new ArrayList<>();
+        this.totalBankAccount = 0;
+        this.totalBookCount = 0;
+        this.totalVisitorCount = 0;
+        this.bookCollection = new HashMap<>();
+        this.rentedBooks = new HashMap<>();
+        this.presentDate = new GregorianCalendar();
+        presentDate.setTime(new Date());
         BufferedReader books = new BufferedReader(new FileReader("src/books.txt"));
         String book;
         while ((book = books.readLine()) != null)
@@ -62,11 +51,9 @@ public class Library {
         this.rentedBooks.remove(book.getTitle());
         this.bookCollection.put(book.getTitle(), book);
     }
-    public ArrayList<Visitor> getVisitors() {
-        return visitors;
-    }
+
     public void addBook(Book book) {
-        books.add(book);
+        bookCollection.put(book.getTitle(), book);
     }
 
     public void fillBookStore(String bookString) {
@@ -111,33 +98,32 @@ public class Library {
         String date = bookSections[index+1];
         int pages = Integer.valueOf(bookSections[index+2]);
         Book book = new Book(title, authors, ISBN, publisher, date, pages);
-        bookStore.add(book);
+        bookCollection.put(title, book);
     }
-
-    public ArrayList<Book> getBookStore() {
-        return bookStore;
-    }
-
     public ArrayList<Book> getStoreSearch() {
         return storeSearch;
     }
-
     public void setStoreSearch(ArrayList<Book> searchResults) {
-        storeSearch=searchResults;
+        storeSearch = searchResults;
     }
-
-    public ArrayList<Book> getBooks() {
-        return books;
+    public HashMap<String, Book> getRentedBooks(){
+        return this.rentedBooks;
     }
-
-    public HashMap<String, Book> getRentedBooks(){return this.rentedBooks;}
-    public HashMap<String, Book> getBookCollection(){return this.bookCollection;}
-    public GregorianCalendar getPresentDate(){return this.presentDate;}
-    public int getTotalBookCount(){return this.bookCollection.size();}
-    public int getTotalBankAccount(){return totalBankAccount;}
-    public static ArrayList<Visitor> getRegisteredVisitors(){
+    public HashMap<String, Book> getBookCollection(){
+        return this.bookCollection;
+    }
+    public GregorianCalendar getPresentDate(){return this.presentDate;
+    }
+    public int getTotalBookCount(){
+        return this.bookCollection.size();
+    }
+    public int getTotalBankAccount(){
+        return totalBankAccount;
+    }
+    public ArrayList<Visitor> getRegisteredVisitors(){
         return registeredVisitors;
     }
-    public Object clone() throws CloneNotSupportedException{ return super.clone(); }
-
+    public Object clone() throws CloneNotSupportedException{
+        return super.clone();
+    }
 }

@@ -20,7 +20,7 @@ public class RegisterVisitor implements Command {
     }
 
     public void execute() {
-        ArrayList<Visitor> visitors = library.getVisitors();
+        ArrayList<Visitor> visitors = library.getRegisteredVisitors();
         visitors.add(visitor);
         System.out.println("register,"+String.valueOf(visitor.getVisitorID())+ ",September 26th 2020");
     }

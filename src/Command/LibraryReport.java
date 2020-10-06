@@ -29,13 +29,17 @@ public class LibraryReport implements Command {
     private String getCollectionString(){
         return "Current Collection Size: " + currentLibrary.getBookCollection().size() + '\n';
     }
+    private String getDateString(){
+        return "Current Date: " + currentLibrary.getPresentDate().getTime().toString() + '\n';
+    }
     public void execute(){
         String reportString = "";
-        reportString = reportString + getVisitorString();
-        reportString = reportString + getBookString();
-        reportString = reportString + getBankString();
-        reportString = reportString + getRentedString();
-        reportString = reportString + getCollectionString();
+        reportString += getVisitorString();
+        reportString += getBookString();
+        reportString += getBankString();
+        reportString += getRentedString();
+        reportString += getCollectionString();
+        reportString += getDateString();
         System.out.println(reportString);
     }
 }

@@ -3,8 +3,9 @@ package Command;
 import Library.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
- public class BookStoreSearch implements Command {
+public class BookStoreSearch implements Command {
 
      private ArrayList<String> search;
      private Library library;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
      }
 
         public void execute() {
-            ArrayList<Book> bookLibrary = library.getBookStore();
+            ArrayList<Book> bookLibrary = new ArrayList<>(library.getBookCollection().values());
             ArrayList<Book> searchResults = new ArrayList<Book>();
             SortStrategy strategy = null;
             for(Book book:bookLibrary) {

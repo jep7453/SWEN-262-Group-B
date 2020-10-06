@@ -20,7 +20,7 @@ public class Time implements Command {
         this.library = library;
         this.presentDate = present;
         presentDate.setLenient(true);
-        this.simulatedDate = setSimulatedDate(advancement.split(" ")[1], advancement.split(" ")[0]);
+        this.simulatedDate = setSimulatedDate(advancement.split(",")[1], advancement.split(",")[0]);
         simulatedDate.setLenient(true);
     }
 
@@ -28,17 +28,17 @@ public class Time implements Command {
         int advancementInt = Integer.parseInt(advancementValue);
         switch (advancement) {
             case "minutes"://separate the string "hh:mm:ss" add the time then add it back to newTime
-               simulatedDate.set(Calendar.MINUTE, presentDate.get(Calendar.MINUTE) + advancementInt);
-               return simulatedDate;
+               presentDate.set(Calendar.MINUTE, presentDate.get(Calendar.MINUTE) + advancementInt);
+               return presentDate;
             case "hour":
-                simulatedDate.set(Calendar.HOUR, presentDate.get(Calendar.HOUR) + advancementInt);
-                return simulatedDate;
+                presentDate.set(Calendar.HOUR, presentDate.get(Calendar.HOUR) + advancementInt);
+                return presentDate;
             case "day":
-                simulatedDate.set(Calendar.DAY_OF_MONTH, presentDate.get(Calendar.DAY_OF_MONTH) + advancementInt);
-                return simulatedDate;
+                presentDate.set(Calendar.DAY_OF_MONTH, presentDate.get(Calendar.DAY_OF_MONTH) + advancementInt);
+                return presentDate;
             case "month":
-                simulatedDate.set(Calendar.MONTH, presentDate.get(Calendar.MONTH) + advancementInt);
-                return simulatedDate;
+                presentDate.set(Calendar.MONTH, presentDate.get(Calendar.MONTH) + advancementInt);
+                return presentDate;
             default:
                 return null;
         }

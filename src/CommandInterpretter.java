@@ -53,7 +53,6 @@ public class CommandInterpretter {
                                 inAuthors=false;
                                 search.add(authors);
                             }
-
                         }
                         else
                             search.add(part);
@@ -100,7 +99,8 @@ public class CommandInterpretter {
             case "advance":
                 GregorianCalendar calendar = new GregorianCalendar();
                 calendar.setTime(new Date());
-                command = new Time(calendar,parts[1],library);
+                String advancement = parts[1].toString() + "," + parts[2].toString();
+                command = new Time(calendar,advancement,library);
                 return command;
             default:
                 return null;
