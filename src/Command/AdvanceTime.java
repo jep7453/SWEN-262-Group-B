@@ -9,13 +9,13 @@ import java.util.*;
  * @author Zuri Shaw
  */
 
-public class Time implements Command {
+public class AdvanceTime implements Command {
 
     private final GregorianCalendar presentDate;
     private final GregorianCalendar simulatedDate;
     private final Library library;
 
-    public Time(GregorianCalendar present, String advancement, Library library){//advancement should be "[value] [time]" Ex. "5 hour"
+    public AdvanceTime(GregorianCalendar present, String advancement, Library library){//advancement should be "[value] [time]" Ex. "5 hour"
         // do not include the "s"
         this.library = library;
         this.presentDate = present;
