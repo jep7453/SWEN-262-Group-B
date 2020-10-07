@@ -15,6 +15,7 @@ public class Library implements Cloneable{
     public int totalBankAccount;
     private HashMap<String, Book> bookCollection;
     private HashMap<String,Book> rentedBooks;
+    private HashMap<String,Book> storeCollection;
     private GregorianCalendar presentDate;
 
     public Library() throws IOException {
@@ -23,6 +24,7 @@ public class Library implements Cloneable{
         this.totalBookCount = 0;
         this.totalVisitorCount = 0;
         this.bookCollection = new HashMap<>();
+        this.storeCollection = new HashMap<>();
         this.rentedBooks = new HashMap<>();
         this.presentDate = new GregorianCalendar();
         presentDate.setTime(new Date());
@@ -98,7 +100,7 @@ public class Library implements Cloneable{
         String date = bookSections[index+1];
         int pages = Integer.valueOf(bookSections[index+2]);
         Book book = new Book(title, authors, ISBN, publisher, date, pages);
-        bookCollection.put(title, book);
+        storeCollection.put(title, book);
     }
     public ArrayList<Book> getStoreSearch() {
         return storeSearch;
@@ -111,6 +113,9 @@ public class Library implements Cloneable{
     }
     public HashMap<String, Book> getBookCollection(){
         return this.bookCollection;
+    }
+    public HashMap<String, Book> getStoreCollection(){
+        return this.storeCollection;
     }
     public GregorianCalendar getPresentDate(){return this.presentDate;
     }

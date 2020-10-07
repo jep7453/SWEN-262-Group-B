@@ -1,9 +1,8 @@
 import Command.*;
 import Library.Library;
-import java.util.GregorianCalendar;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Calendar;
+
+import java.util.*;
+
 
 public class CommandInterpretter {
 
@@ -15,6 +14,13 @@ public class CommandInterpretter {
     public static Command interpret(Library library, String request) {
         Command command;
         String[] parts = request.split(",");
+        while(parts[parts.length-1].charAt(parts[parts.length-1].length()-1)!=(';')) {
+            System.out.println("partial-request;");
+            Scanner input = new Scanner(System.in);
+            request =request + input.nextLine();
+            parts = request.split(",");
+        }
+        parts[parts.length-1]=parts[parts.length-1].substring(0,parts[parts.length-1].length()-1);
         switch (parts[0]) {
             case "register":
                command = new RegisterVisitor(library,parts[1],parts[2],parts[3],parts[4]);
@@ -100,7 +106,7 @@ public class CommandInterpretter {
                 GregorianCalendar calendar = new GregorianCalendar();
                 calendar.setTime(new Date());
                 String advancement = parts[1].toString() + "," + parts[2].toString();
-                command = new Time(calendar,advancement,library);
+                command = new AdvanceTime(calendar,advancement,library);
                 return command;
             default:
                 return null;

@@ -27,7 +27,7 @@ public class PurchaseBook implements Command {
             purchased.add(storeBook);
             storeBook.addCopies(quantity);
             if(!bookLibrary.contains(storeBook)) {
-                bookLibrary.add(storeBook);
+                library.getBookCollection().put(storeBook.getTitle(),storeBook);
             }
         }
         System.out.println("purchase,success,"+purchased.size());
