@@ -140,6 +140,9 @@ public class CommandInterpretter {
                 }
                 command = new AdvanceTime(calendar,advancement,library);
                 return command;
+            case "datetime":
+                command = new CurrentDateTime(library);
+                return command;
             default:
                 return null;
         }
