@@ -16,12 +16,9 @@ public class Library implements Cloneable{
     private HashMap<String,Book> storeCollection;
     private GregorianCalendar presentDate;
     private ArrayList<Day> history;
-    private GregorianCalendar currentDate;
+    private GregorianCalendar simulatedDate;
 
     public Library() throws IOException {
-        GregorianCalendar startDate = new GregorianCalendar();
-        startDate.setTime(new Date());
-        this.currentDate = startDate;
         this.registeredVisitors = new ArrayList<>();
         this.totalBankAccount = 0;
         this.bookCollection = new HashMap<>();
@@ -40,24 +37,6 @@ public class Library implements Cloneable{
         if(registeredVisitors ==null)
             return 0;
         return registeredVisitors.size();
-    }
-
-    public void checkoutBook(Book book){
-        GregorianCalendar returnDate = new GregorianCalendar();
-        returnDate.setTime(new Date());
-        returnDate.set(Calendar.MONTH, returnDate.get(Calendar.MONTH) + 1);//for now just set the return date for 1 month in advance
-        book.setReturnDate(returnDate);
-        this.bookCollection.remove(book.getTitle());
-        this.rentedBooks.put(book.getTitle(), book);
-    }
-    public void returnBook(Book book) {
-        book.setReturnDate(null);
-        this.rentedBooks.remove(book.getTitle());
-        this.bookCollection.put(book.getTitle(), book);
-    }
-
-    public void addBook(Book book) {
-        bookCollection.put(book.getTitle(), book);
     }
 
     public void fillBookStore(String bookString) {
@@ -111,7 +90,7 @@ public class Library implements Cloneable{
         this.history.add(day);
     }
     public void setSimulatedTime(GregorianCalendar simulatedTime){
-        this.currentDate = simulatedTime;
+        this.presentDate = simulatedTime;
     }
     public ArrayList<Book> getStoreSearch() {
         return storeSearch;

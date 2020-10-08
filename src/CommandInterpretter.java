@@ -130,9 +130,14 @@ public class CommandInterpretter {
                 }
                 return command;
             case "advance":
+
                 GregorianCalendar calendar = new GregorianCalendar();
                 calendar.setTime(new Date());
-                String advancement = parts[1].toString() + "," + parts[2].toString();
+
+                String advancement = parts[1].toString() + ",";
+                if(parts.length > 2){
+                    advancement += parts[2].toString();
+                }
                 command = new AdvanceTime(calendar,advancement,library);
                 return command;
             default:

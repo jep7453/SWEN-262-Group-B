@@ -30,24 +30,29 @@ public class AdvanceTime implements Command {
     }
 
     public void setSimulatedDate(String dayStr, String hourStr){
-        int days = Integer.valueOf(dayStr);
-        this.simulatedDate = presentDate;
-        simulatedDate.set(Calendar.DAY_OF_MONTH, presentDate.get(Calendar.DAY_OF_MONTH) + days);
-        if(hourStr != null){
-            int hours = Integer.valueOf(hourStr);
-            simulatedDate.set(Calendar.HOUR, presentDate.get(Calendar.HOUR) + hours);
+        try {
+            int days = Integer.valueOf(dayStr);
+            this.simulatedDate = presentDate;
+            simulatedDate.set(Calendar.DAY_OF_MONTH, presentDate.get(Calendar.DAY_OF_MONTH) + days);
+            if (hourStr != null) {
+                int hours = Integer.valueOf(hourStr);
+                simulatedDate.set(Calendar.HOUR, presentDate.get(Calendar.HOUR) + hours);
+            }
+        }
+        catch (NumberFormatException e){
+            System.out.println("The days and hours field should be a number not a string" + '\n'
+            + "Ex: advance,5,10");
         }
     }
 
     public void execute() throws CloneNotSupportedException{
-        Library simulatedLibrary = (Library) library.clone();
-        simulatedLibrary.setSimulatedTime(this.simulatedDate);
+        library.setSimulatedTime(this.simulatedDate);
 
         HashMap<String, Book> rentedBooks = library.getRentedBooks();
         int overdue = 0;
         for( Book book : rentedBooks.values()){
             Date returnDate = book.getReturnDate().getTime();
-            if(returnDate.compareTo(simulatedLibrary.getPresentDate().getTime()) < 0){
+            if(returnDate.compareTo(library.getPresentDate().getTime()) < 0){
                 overdue++;
             }
         }
