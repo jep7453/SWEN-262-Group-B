@@ -17,6 +17,7 @@ public class Day {
     public Day(GregorianCalendar date){
         this.currentDay = date;
     }
+
     public int getDate(){
         return currentDay.get(Calendar.DAY_OF_MONTH);
     }

@@ -21,10 +21,6 @@ public class CommandInterpretter {
         GregorianCalendar requestDate = new GregorianCalendar();
         requestDate.setTime(new Date());
 
-        if(currentDay.getDate() != requestDate.get(Calendar.DAY_OF_MONTH)){//if the date of the command does not equal the current date
-            library.addToHistory(currentDay);
-            this.currentDay = new Day(requestDate);//create a new day object to keep track of transactions for the day
-        }
         while(parts[parts.length-1].charAt(parts[parts.length-1].length()-1)!=(';')) {
             System.out.println("partial-request;");
             Scanner input = new Scanner(System.in);
@@ -134,9 +130,22 @@ public class CommandInterpretter {
                 GregorianCalendar calendar = new GregorianCalendar();
                 calendar.setTime(new Date());
 
-                String advancement = parts[1].toString() + ",";
+                String advancement = parts[1] + ",";
+                for(int i = 1; i <= Integer.valueOf(parts[1]); i++){//i would be the number of days we have already advanced
+                    GregorianCalendar skippedDate = new GregorianCalendar();
+                    skippedDate.setTime(new Date());
+                    skippedDate.set(Calendar.DAY_OF_MONTH, skippedDate.get(Calendar.DAY_OF_MONTH) + i);//make sure the skipped days have the correct date
+                    Day skippedDayObj = new Day(skippedDate);
+                    library.addToHistory(skippedDayObj);
+                    if(i == Integer.valueOf(parts[1])){//the day we advanced to
+                        this.currentDay = skippedDayObj;//if we advanced the correct amount of days already then set the last created date obj to current day
+                    }
+                    else{
+                        library.addToHistory(skippedDayObj);//if we just want to skip the day then add directly to the history
+                    }
+                }
                 if(parts.length > 2){
-                    advancement += parts[2].toString();
+                    advancement += parts[2];
                 }
                 command = new AdvanceTime(calendar,advancement,library);
                 return command;

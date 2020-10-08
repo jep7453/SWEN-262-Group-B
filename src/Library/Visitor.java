@@ -27,5 +27,4 @@ public class Visitor {
         return visitorID;
     }
 
-
 }
