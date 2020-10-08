@@ -9,13 +9,13 @@ import java.util.*;
  * @author Zuri Shaw
  */
 
-public class Time implements Command {
+public class AdvanceTime implements Command {
 
     private final GregorianCalendar presentDate;
     private GregorianCalendar simulatedDate;
     private final Library library;
 
-    public Time(GregorianCalendar present, String advancement, Library library){//advancement should be "[days] [hours]" Ex. "5,10"
+    public AdvanceTime(GregorianCalendar present, String advancement, Library library){//advancement should be "[days] [hours]" Ex. "5,10"
         this.library = library;
         this.presentDate = present;
         presentDate.setLenient(true);

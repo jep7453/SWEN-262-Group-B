@@ -10,23 +10,25 @@ public class Library implements Cloneable{
 
     private ArrayList<Book> storeSearch;
     private static ArrayList<Visitor> registeredVisitors;
-    private int totalBookCount;
-    private int totalVisitorCount;
     public int totalBankAccount;
     private HashMap<String, Book> bookCollection;
     private HashMap<String,Book> rentedBooks;
     private HashMap<String,Book> storeCollection;
     private GregorianCalendar presentDate;
+    private ArrayList<Day> history;
+    private GregorianCalendar currentDate;
 
     public Library() throws IOException {
+        GregorianCalendar startDate = new GregorianCalendar();
+        startDate.setTime(new Date());
+        this.currentDate = startDate;
         this.registeredVisitors = new ArrayList<>();
         this.totalBankAccount = 0;
-        this.totalBookCount = 0;
-        this.totalVisitorCount = 0;
         this.bookCollection = new HashMap<>();
         this.storeCollection = new HashMap<>();
         this.rentedBooks = new HashMap<>();
         this.presentDate = new GregorianCalendar();
+        this.history = new ArrayList<>();
         presentDate.setTime(new Date());
         BufferedReader books = new BufferedReader(new FileReader("src/books.txt"));
         String book;
@@ -102,6 +104,15 @@ public class Library implements Cloneable{
         Book book = new Book(title, authors, ISBN, publisher, date, pages);
         storeCollection.put(title, book);
     }
+    public ArrayList<Day> getHistory(){
+        return this.history;
+    }
+    public void addToHistory(Day day){
+        this.history.add(day);
+    }
+    public void setSimulatedTime(GregorianCalendar simulatedTime){
+        this.currentDate = simulatedTime;
+    }
     public ArrayList<Book> getStoreSearch() {
         return storeSearch;
     }
@@ -117,13 +128,8 @@ public class Library implements Cloneable{
     public HashMap<String, Book> getStoreCollection(){
         return this.storeCollection;
     }
-    public GregorianCalendar getPresentDate(){return this.presentDate;
-    }
-    public int getTotalBookCount(){
-        return this.bookCollection.size();
-    }
-    public int getTotalBankAccount(){
-        return totalBankAccount;
+    public GregorianCalendar getPresentDate(){
+        return this.presentDate;
     }
     public ArrayList<Visitor> getRegisteredVisitors(){
         return registeredVisitors;
