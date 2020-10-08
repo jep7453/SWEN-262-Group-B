@@ -29,7 +29,6 @@ public class LibraryBookSearch implements Command {
                             valid=false; }
                     if(parameterNum==1)
                         if(!parameter.equals(book.getAuthorsString())) {
-                            String lol = book.getAuthorsString();
                             valid=false; }
                     if(parameterNum==2)
                         if(!parameter.equals(book.getISBN())) {

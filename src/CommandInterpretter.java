@@ -1,34 +1,26 @@
 import Command.*;
 import Library.Library;
-import Library.Day;
-import java.util.GregorianCalendar;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Calendar;
+
+import java.util.*;
+
 
 public class CommandInterpretter {
 
-    private Day currentDay;
 
-    public CommandInterpretter() {
-        GregorianCalendar currentDate = new GregorianCalendar();
-        currentDate.setTime(new Date());
-        currentDay = new Day(currentDate);
-    }
+    public CommandInterpretter() { }
 
-    public Command interpret(Library library, String request) {
 
-        GregorianCalendar requestDate = new GregorianCalendar();
-        requestDate.setTime(new Date());
 
-        if(currentDay.getDate() != requestDate.get(Calendar.DAY_OF_MONTH)){//if the date of the command does not equal the current date
-            library.addToHistory(currentDay);
-            this.currentDay = new Day(requestDate);//create a new day object to keep track of transactions for the day
-        }
-
+    public static Command interpret(Library library, String request) {
         Command command;
         String[] parts = request.split(",");
-        currentDay.updateDay(parts);//sends the command to the day object so it can update itself
+        while(parts[parts.length-1].charAt(parts[parts.length-1].length()-1)!=(';')) {
+            System.out.println("partial-request;");
+            Scanner input = new Scanner(System.in);
+            request =request + input.nextLine();
+            parts = request.split(",");
+        }
+        parts[parts.length-1]=parts[parts.length-1].substring(0,parts[parts.length-1].length()-1);
         switch (parts[0]) {
             case "register":
                command = new RegisterVisitor(library,parts[1],parts[2],parts[3],parts[4]);
@@ -108,28 +100,13 @@ public class CommandInterpretter {
                 command = new LibraryBookSearch(library,info);
                 return command;
             case "report":
-                if(parts.length == 1) {
-                    command = new LibraryReport(library, library.getHistory());//if they want the full history
-                }
-                else{
-                    ArrayList<Day> reportDays = new ArrayList<>();
-                    ArrayList<Day> history = library.getHistory();
-                    try {
-                        for (int i = 0; i <= Integer.valueOf(parts[1]); i++) {
-                            reportDays.add(history.get((history.size() - 1) - i));//gets the day objects from the top of the list which is the most recent days
-                        }
-                    }
-                    catch (ArrayIndexOutOfBoundsException e){
-                        System.out.println("The Library has not existed for that many days!!");
-                    }
-                    command = new LibraryReport(library, reportDays);
-                }
+                command = new LibraryReport(library);
                 return command;
             case "advance":
                 GregorianCalendar calendar = new GregorianCalendar();
                 calendar.setTime(new Date());
                 String advancement = parts[1].toString() + "," + parts[2].toString();
-                command = new Time(calendar,advancement,library);
+                command = new AdvanceTime(calendar,advancement,library);
                 return command;
             default:
                 return null;
