@@ -12,40 +12,36 @@ import java.util.*;
 public class Time implements Command {
 
     private final GregorianCalendar presentDate;
-    private final GregorianCalendar simulatedDate;
+    private GregorianCalendar simulatedDate;
     private final Library library;
 
-    public Time(GregorianCalendar present, String advancement, Library library){//advancement should be "[value] [time]" Ex. "5 hour"
-        // do not include the "s"
+    public Time(GregorianCalendar present, String advancement, Library library){//advancement should be "[days] [hours]" Ex. "5,10"
         this.library = library;
         this.presentDate = present;
         presentDate.setLenient(true);
-        this.simulatedDate = setSimulatedDate(advancement.split(",")[1], advancement.split(",")[0]);
+        String[] advancementValue = advancement.split(",");
+        if(advancementValue.length == 1) {//if they only gave us a value for days and not hours
+            setSimulatedDate(advancementValue[0], null);
+        }
+        else{
+            setSimulatedDate(advancementValue[0],advancementValue[1]);
+        }
         simulatedDate.setLenient(true);
     }
 
-    public GregorianCalendar setSimulatedDate(String advancement, String advancementValue){
-        int advancementInt = Integer.parseInt(advancementValue);
-        switch (advancement) {
-            case "minutes"://separate the string "hh:mm:ss" add the time then add it back to newTime
-               presentDate.set(Calendar.MINUTE, presentDate.get(Calendar.MINUTE) + advancementInt);
-               return presentDate;
-            case "hour":
-                presentDate.set(Calendar.HOUR, presentDate.get(Calendar.HOUR) + advancementInt);
-                return presentDate;
-            case "day":
-                presentDate.set(Calendar.DAY_OF_MONTH, presentDate.get(Calendar.DAY_OF_MONTH) + advancementInt);
-                return presentDate;
-            case "month":
-                presentDate.set(Calendar.MONTH, presentDate.get(Calendar.MONTH) + advancementInt);
-                return presentDate;
-            default:
-                return null;
+    public void setSimulatedDate(String dayStr, String hourStr){
+        int days = Integer.valueOf(dayStr);
+        this.simulatedDate = presentDate;
+        simulatedDate.set(Calendar.DAY_OF_MONTH, presentDate.get(Calendar.DAY_OF_MONTH) + days);
+        if(hourStr != null){
+            int hours = Integer.valueOf(hourStr);
+            simulatedDate.set(Calendar.HOUR, presentDate.get(Calendar.HOUR) + hours);
         }
     }
 
     public void execute() throws CloneNotSupportedException{
         Library simulatedLibrary = (Library) library.clone();
+        simulatedLibrary.setSimulatedTime(this.simulatedDate);
 
         HashMap<String, Book> rentedBooks = library.getRentedBooks();
         int overdue = 0;
@@ -55,8 +51,6 @@ public class Time implements Command {
                 overdue++;
             }
         }
-        LibraryReport simulatedReport = new LibraryReport(simulatedLibrary);
-        simulatedReport.execute();
         System.out.println("Overdue Book Count: " + overdue + '\n');
     }
 }
