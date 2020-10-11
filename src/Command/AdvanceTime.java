@@ -48,10 +48,10 @@ public class AdvanceTime implements Command {
         Day simulation = new Day(this.simulatedDate);
         library.setSimulatedTime(simulation);
 
-        HashMap<String, CheckedBook> rentedBooks = library.getRentedBooks();
+        ArrayList<CheckedBook> rentedBooks = library.getRentedBooks();
         int overdue = 0;
-        for( CheckedBook book : rentedBooks.values()){
-            Date returnDate = book.getdueDate().getTime();
+        for( CheckedBook book : rentedBooks){
+            Date returnDate = book.getDueDate().getTime();
             if(returnDate.compareTo(library.getPresentDate().getTime()) < 0){
                 overdue++;
             }
