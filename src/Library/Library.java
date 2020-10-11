@@ -13,18 +13,18 @@ public class Library implements Cloneable{
     private HashMap<Integer,Visitor> registeredVisitors;
     public int totalBankAccount;
     private HashMap<String, Book> bookCollection;
-    private HashMap<String,CheckedBook> rentedBooks;
+    private ArrayList<CheckedBook> rentedBooks;
     private HashMap<String,Book> storeCollection;
     private GregorianCalendar presentDate;
     private ArrayList<Day> history;
-    private GregorianCalendar simulatedDate;
+    private LibraryState state;
 
     public Library(Day startDay) throws IOException {
         this.registeredVisitors = new HashMap<>();
         this.totalBankAccount = 0;
         this.bookCollection = new HashMap<>();
         this.storeCollection = new HashMap<>();
-        this.rentedBooks = new HashMap<>();
+        this.rentedBooks = new ArrayList<>();
         this.presentDate = new GregorianCalendar();
         this.history = new ArrayList<>();
         presentDate.setTime(new Date());
@@ -33,6 +33,7 @@ public class Library implements Cloneable{
         String book;
         while ((book = books.readLine()) != null)
             this.fillBookStore(book);
+        updateState();
     }
 
     public int visitorsLength() {
@@ -85,6 +86,20 @@ public class Library implements Cloneable{
         Book book = new Book(title, authors, ISBN, publisher, date, pages);
         storeCollection.put(title, book);
     }
+
+    public boolean borrowBook() {
+        return state.borrowBook();
+    }
+
+    public void updateState() {
+        if(presentDate.get(Calendar.HOUR)+(presentDate.get(Calendar.AM_PM)*12)>=8&&presentDate.get(Calendar.HOUR)+(presentDate.get(Calendar.AM_PM)*12)<19) {
+            state = new OpenLibrary(this);
+        }
+        else {
+            state = new ClosedLibrary(this);
+        }
+    }
+
     public ArrayList<Day> getHistory(){
 
         return this.history;
@@ -108,7 +123,7 @@ public class Library implements Cloneable{
     public ArrayList<Book> getLibrarySearch() {
         return librarySearchCache;
     }
-    public HashMap<String, CheckedBook> getRentedBooks(){
+    public ArrayList<CheckedBook> getRentedBooks(){
         return this.rentedBooks;
     }
     public HashMap<String, Book> getBookCollection(){

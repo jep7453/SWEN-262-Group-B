@@ -1,5 +1,7 @@
-package Command;
+package Command.SortStrategy;
 
+import Command.Command;
+import Command.SortStrategy.SortStrategy;
 import Library.Book;
 
 import java.util.ArrayList;
