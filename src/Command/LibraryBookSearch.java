@@ -50,13 +50,13 @@ public class LibraryBookSearch implements Command {
                 }
                 parameterNum++;
             }
-            if(valid) {
+            if(valid && book.getCopiesAvailable() >0) {
                 searchResults.add(book);
             }
             if(strategy!=null)
                 searchResults = strategy.sort(searchResults);
         }
-        library.setStoreSearch(searchResults);
+        library.setLibrarySearch(searchResults);
         System.out.println("info,"+searchResults.size());
         for(Book foundBook: searchResults)
             System.out.println(searchResults.indexOf(foundBook)+1+","+Integer.valueOf(foundBook.getCopiesAvailable())+","+foundBook);

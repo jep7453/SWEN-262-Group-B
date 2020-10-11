@@ -58,6 +58,10 @@ public class Book {
         copiesAvailable+=amount;
     }
 
+    public void borrowCopy(int amount) {
+        copiesAvailable-=amount;
+    }
+
     public int getCopiesAvailable() {
         return copiesAvailable;
     }

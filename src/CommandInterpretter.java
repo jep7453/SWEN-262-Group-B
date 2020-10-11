@@ -152,6 +152,17 @@ public class CommandInterpretter {
             case "datetime":
                 command = new CurrentDateTime(library);
                 return command;
+            case "borrow":
+                books = new ArrayList<>();
+                iter = 0;
+                for(String part: parts) {
+                    if(iter>1) {
+                        books.add(Integer.valueOf(part));
+                    }
+                    iter++;
+                }
+                command = new BorrowBook(library,Integer.valueOf(parts[1]),books);
+                return command;
             default:
                 return null;
         }

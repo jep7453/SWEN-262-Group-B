@@ -26,14 +26,19 @@ public class Day {
         switch (request[0]){
             case "register":
                 this.registeredVisitors++;
+                break;
             case "purchase":
                 this.booksPurchased++;
+                break;
             case "rent":
                 this.rentedBooks++;
+                break;
             case "return":
                 this.booksReturned++;
+                break;
             case "Pay":
                 this.totalBankAccount += Integer.valueOf(request[2]);
+                break;
             default:
         }
     }

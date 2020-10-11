@@ -8,18 +8,19 @@ import java.util.*;
 
 public class Library implements Cloneable{
 
-    private ArrayList<Book> storeSearch;
-    private static ArrayList<Visitor> registeredVisitors;
+    private ArrayList<Book> librarySearchCache;
+    private ArrayList<Book> storeSearchCache;
+    private HashMap<Integer,Visitor> registeredVisitors;
     public int totalBankAccount;
     private HashMap<String, Book> bookCollection;
-    private HashMap<String,Book> rentedBooks;
+    private HashMap<String,CheckedBook> rentedBooks;
     private HashMap<String,Book> storeCollection;
     private GregorianCalendar presentDate;
     private ArrayList<Day> history;
     private GregorianCalendar simulatedDate;
 
     public Library() throws IOException {
-        this.registeredVisitors = new ArrayList<>();
+        this.registeredVisitors = new HashMap<>();
         this.totalBankAccount = 0;
         this.bookCollection = new HashMap<>();
         this.storeCollection = new HashMap<>();
@@ -33,7 +34,7 @@ public class Library implements Cloneable{
             this.fillBookStore(book);
     }
 
-    public static int visitorsLength() {
+    public int visitorsLength() {
         if(registeredVisitors ==null)
             return 0;
         return registeredVisitors.size();
@@ -93,12 +94,16 @@ public class Library implements Cloneable{
         this.presentDate = simulatedTime;
     }
     public ArrayList<Book> getStoreSearch() {
-        return storeSearch;
+        return storeSearchCache;
     }
-    public void setStoreSearch(ArrayList<Book> searchResults) {
-        storeSearch = searchResults;
+    public void setStoreSearch(ArrayList<Book> searchResults) { storeSearchCache = searchResults; }
+    public void setLibrarySearch(ArrayList<Book> searchResults) {
+        librarySearchCache = searchResults;
     }
-    public HashMap<String, Book> getRentedBooks(){
+    public ArrayList<Book> getLibrarySearch() {
+        return librarySearchCache;
+    }
+    public HashMap<String, CheckedBook> getRentedBooks(){
         return this.rentedBooks;
     }
     public HashMap<String, Book> getBookCollection(){
@@ -110,7 +115,7 @@ public class Library implements Cloneable{
     public GregorianCalendar getPresentDate(){
         return this.presentDate;
     }
-    public ArrayList<Visitor> getRegisteredVisitors(){
+    public HashMap<Integer,Visitor> getRegisteredVisitors(){
         return registeredVisitors;
     }
     public Object clone() throws CloneNotSupportedException{
