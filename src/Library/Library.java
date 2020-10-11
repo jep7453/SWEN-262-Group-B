@@ -19,7 +19,7 @@ public class Library implements Cloneable{
     private ArrayList<Day> history;
     private GregorianCalendar simulatedDate;
 
-    public Library() throws IOException {
+    public Library(Day startDay) throws IOException {
         this.registeredVisitors = new HashMap<>();
         this.totalBankAccount = 0;
         this.bookCollection = new HashMap<>();
@@ -28,6 +28,7 @@ public class Library implements Cloneable{
         this.presentDate = new GregorianCalendar();
         this.history = new ArrayList<>();
         presentDate.setTime(new Date());
+        history.add(startDay);
         BufferedReader books = new BufferedReader(new FileReader("src/books.txt"));
         String book;
         while ((book = books.readLine()) != null)
@@ -85,18 +86,22 @@ public class Library implements Cloneable{
         storeCollection.put(title, book);
     }
     public ArrayList<Day> getHistory(){
+
         return this.history;
     }
     public void addToHistory(Day day){
         this.history.add(day);
     }
-    public void setSimulatedTime(GregorianCalendar simulatedTime){
-        this.presentDate = simulatedTime;
+    public void setSimulatedTime(Day newDayObj){
+        this.presentDate = newDayObj.getCalender();
+        addToHistory(newDayObj);
     }
     public ArrayList<Book> getStoreSearch() {
         return storeSearchCache;
     }
-    public void setStoreSearch(ArrayList<Book> searchResults) { storeSearchCache = searchResults; }
+    public void setStoreSearch(ArrayList<Book> searchResults) {
+        storeSearchCache = searchResults;
+    }
     public void setLibrarySearch(ArrayList<Book> searchResults) {
         librarySearchCache = searchResults;
     }
@@ -113,12 +118,9 @@ public class Library implements Cloneable{
         return this.storeCollection;
     }
     public GregorianCalendar getPresentDate(){
-        return this.presentDate;
+        return history.get(history.size()-1).getCalender();
     }
     public HashMap<Integer,Visitor> getRegisteredVisitors(){
         return registeredVisitors;
-    }
-    public Object clone() throws CloneNotSupportedException{
-        return super.clone();
     }
 }

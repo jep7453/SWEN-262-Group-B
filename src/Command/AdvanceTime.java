@@ -44,8 +44,9 @@ public class AdvanceTime implements Command {
         }
     }
 
-    public void execute() throws CloneNotSupportedException{
-        library.setSimulatedTime(this.simulatedDate);
+    public void execute(){
+        Day simulation = new Day(this.simulatedDate);
+        library.setSimulatedTime(simulation);
 
         HashMap<String, CheckedBook> rentedBooks = library.getRentedBooks();
         int overdue = 0;

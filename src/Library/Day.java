@@ -15,6 +15,7 @@ public class Day {
     private int booksReturned;
 
     public Day(GregorianCalendar date){
+
         this.currentDay = date;
     }
 

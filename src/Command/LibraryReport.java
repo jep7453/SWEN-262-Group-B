@@ -32,7 +32,7 @@ public class LibraryReport implements Command {
             Day day = reportDays.get(i);
             registeredVisitors += day.getRegisteredVisitors();
         }
-        return " Registered Visitor Count: " + registeredVisitors + '\n';
+        return "Registered Visitor Count: " + registeredVisitors + '\n';
     }
     private String getBankString(){
         int totalBank = 0;
@@ -59,7 +59,7 @@ public class LibraryReport implements Command {
         return "Amount of Returned Books: " + returnedBooks + '\n';
     }
     private String getCollectionString(){
-        return "Current Collection Size: " + currentLibrary.getBookCollection().size() + '\n';
+        return "Current Collection Size: " + currentLibrary.getStoreCollection().size() + '\n';
     }
     private String getDateString(){
         return "Current Date: " + currentLibrary.getPresentDate().getTime().toString() + '\n';

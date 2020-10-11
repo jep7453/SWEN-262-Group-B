@@ -10,5 +10,5 @@ public interface Command
     /**
      * Executes command
      */
-    void execute ()throws CloneNotSupportedException;
+    void execute ();
 }
