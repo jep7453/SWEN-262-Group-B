@@ -1,6 +1,5 @@
 package Command;
-import Library.Library;
-import Library.Book;
+import Library.*;
 
 import java.text.DateFormat;
 import java.util.*;
@@ -48,10 +47,10 @@ public class AdvanceTime implements Command {
     public void execute() throws CloneNotSupportedException{
         library.setSimulatedTime(this.simulatedDate);
 
-        HashMap<String, Book> rentedBooks = library.getRentedBooks();
+        HashMap<String, CheckedBook> rentedBooks = library.getRentedBooks();
         int overdue = 0;
-        for( Book book : rentedBooks.values()){
-            Date returnDate = book.getReturnDate().getTime();
+        for( CheckedBook book : rentedBooks.values()){
+            Date returnDate = book.getdueDate().getTime();
             if(returnDate.compareTo(library.getPresentDate().getTime()) < 0){
                 overdue++;
             }
