@@ -1,24 +1,19 @@
 package Library;
 
-public class CheckedBook {
-    private static String IBSN;
-    private static int visitorID;
-    private static String dateCheckedIn;
-    private static String dueDate;
+import java.util.GregorianCalendar;
 
-    public CheckedBook(String IBSN, int id, String dateCheckedIn, String dueDate) {
-        this.IBSN=IBSN;
+public class CheckedBook {
+    private Book book;
+    private int visitorID;
+    private GregorianCalendar dueDate;
+
+    public CheckedBook(Book book, int id, GregorianCalendar dueDate) {
+        this.book=book;
         this.visitorID=id;
-        this.dateCheckedIn=dateCheckedIn;
         this.dueDate=dueDate;
         this.visitorID=id;
     }
-    private static int bookCount = 0;
-    public void addBook() {
-        bookCount++;
-    }
-    public void returnBook() {
-        bookCount--;
-    }
 
+
+    public GregorianCalendar getdueDate(){return dueDate;}
 }

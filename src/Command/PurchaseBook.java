@@ -19,17 +19,17 @@ public class PurchaseBook implements Command {
     }
 
     public void execute() {
-        ArrayList<Book> bookLibrary = library.getBooks();
+        ArrayList<Book> bookLibrary = new ArrayList<>(library.getBookCollection().values());
         ArrayList<Book> bookStore = library.getStoreSearch();
         ArrayList<Book> purchased= new ArrayList<Book>();
         for(Integer book : books) {
-            Book storeBook= bookStore.get(book-1);
+            Book storeBook = bookStore.get(book-1);
             purchased.add(storeBook);
             storeBook.addCopies(quantity);
             if(!bookLibrary.contains(storeBook)) {
-                bookLibrary.add(storeBook);
-                }
+                library.getBookCollection().put(storeBook.getTitle(),storeBook);
             }
+        }
         System.out.println("purchase,success,"+purchased.size());
         for(Book purchasedBook: purchased)
             System.out.println(purchasedBook+","+ String.valueOf(quantity));

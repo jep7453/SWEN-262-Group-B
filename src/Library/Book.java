@@ -1,6 +1,7 @@
 package Library;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 public class Book {
 
@@ -12,6 +13,7 @@ public class Book {
     private  int pages;
     private int copies;
     private int copiesAvailable;
+    private GregorianCalendar returnDate;
 
     public Book(String title, ArrayList<String> authors, String ISBN, String publisher, String date, int pages) {
         this.title=title;
@@ -22,6 +24,7 @@ public class Book {
         this.pages=pages;
         this.copies=0;
         this.copiesAvailable=0;
+        this.returnDate = null;
     }
 
     public String getISBN() {
@@ -55,9 +58,16 @@ public class Book {
         copiesAvailable+=amount;
     }
 
+    public void borrowCopy(int amount) {
+        copiesAvailable-=amount;
+    }
+
     public int getCopiesAvailable() {
         return copiesAvailable;
     }
+
+    public void setReturnDate(GregorianCalendar returnDate){this.returnDate = returnDate;}
+    public GregorianCalendar getReturnDate(){return returnDate;}
 
     @Override
     public String toString() {
