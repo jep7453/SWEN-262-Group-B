@@ -9,10 +9,8 @@ public class CommandInterpretter {
 
     private Day currentDay;
 
-    public CommandInterpretter() {
-        GregorianCalendar startDay = new GregorianCalendar();
-        startDay.setTime(new Date());
-        this.currentDay = new Day(startDay);
+    public CommandInterpretter(Day startDay) {
+        this.currentDay = startDay;
     }
 
     public Command interpret(Library library, String request) {
@@ -28,7 +26,7 @@ public class CommandInterpretter {
             parts = request.split(",");
         }
         parts[parts.length-1]=parts[parts.length-1].substring(0,parts[parts.length-1].length()-1);
-        currentDay.updateDay(parts);
+        currentDay.updateDay(parts);//update the current day observer
         switch (parts[0]) {
             case "register":
                command = new RegisterVisitor(library,parts[1],parts[2],parts[3],parts[4]);
@@ -80,7 +78,7 @@ public class CommandInterpretter {
                 iter = 0;
                 authors = "";
                 inAuthors = false;
-                for(String part: parts) {
+                for(String part : parts) {
                     if(iter>0) {
                         if(part.charAt(0)==('{')) {
                             authors = part.substring(1);
@@ -131,17 +129,25 @@ public class CommandInterpretter {
                 calendar.setTime(new Date());
 
                 String advancement = parts[1] + ",";
+                /*
+                For some reason changing the Calender.DAY_OF_MONTH field for one gregorian calender object will also change
+                the same field for all gregorian calender objects, even if they are independent of each other. So we must save the original DAY_OF_MONTH field as
+                int "j" and use that int to make the skipped day objects
+                 */
+                int j = currentDay.getCalender().get(Calendar.DAY_OF_MONTH);
                 for(int i = 1; i <= Integer.valueOf(parts[1]); i++){//i would be the number of days we have already advanced
-                    GregorianCalendar skippedDate = new GregorianCalendar();
-                    skippedDate.setTime(new Date());
-                    skippedDate.set(Calendar.DAY_OF_MONTH, skippedDate.get(Calendar.DAY_OF_MONTH) + i);//make sure the skipped days have the correct date
+
+                    GregorianCalendar skippedDate = currentDay.getCalender();
+                    skippedDate.set(Calendar.DAY_OF_MONTH, j + i);//make sure the skipped days have the correct date
                     Day skippedDayObj = new Day(skippedDate);
                     library.addToHistory(skippedDayObj);
+
                     if(i == Integer.valueOf(parts[1])){//the day we advanced to
+                        if(parts.length > 2){
+                            skippedDate.set(Calendar.HOUR,skippedDate.get(Calendar.HOUR) + Integer.parseInt(parts[2]));
+                        }
                         this.currentDay = skippedDayObj;//if we advanced the correct amount of days already then set the last created date obj to current day
-                    }
-                    else{
-                        library.addToHistory(skippedDayObj);//if we just want to skip the day then add directly to the history
+                        System.out.println("Current Day:" + this.currentDay.getCalender().getTime().toString() + '\n');
                     }
                 }
                 if(parts.length > 2){

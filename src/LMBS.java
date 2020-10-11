@@ -1,6 +1,9 @@
 import Command.Command;
 import Library.*;
 import java.io.IOException;
+import java.lang.management.GarbageCollectorMXBean;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 /**
@@ -10,8 +13,12 @@ public class LMBS
 {
 
     public static void main(String[] args) throws IOException, CloneNotSupportedException {
-        Library library = new Library();
-        CommandInterpretter interpreter = new CommandInterpretter();
+        //creates the first day observer and gives it to the library constructor
+        GregorianCalendar start = new GregorianCalendar();
+        start.setTime(new Date());
+        Day startDayObv = new Day(start);
+        Library library = new Library(startDayObv);
+        CommandInterpretter interpreter = new CommandInterpretter(startDayObv);
 
         System.out.println("Library Book Managment System\nPlease enter a command:");
         while(true) {
@@ -19,8 +26,12 @@ public class LMBS
             String request = input.nextLine();
 
             Command command = interpreter.interpret(library,request);
-            command.execute();
-            System.out.println();
+            try {
+                command.execute();
+            }
+            catch (NullPointerException e){
+                System.out.println("Incorrect Command");
+            }
         }
 
     }

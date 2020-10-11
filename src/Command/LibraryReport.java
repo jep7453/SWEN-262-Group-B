@@ -20,7 +20,7 @@ public class LibraryReport implements Command {
 
     private String getPurchasedString(){
         int purchasedBooks = 0;
-        for(int i = 0; i <= reportDays.size(); i++){
+        for(int i = 0; i < reportDays.size(); i++){
             Day day = reportDays.get(i);
             purchasedBooks += day.getBooksPurchased();
         }
@@ -28,7 +28,7 @@ public class LibraryReport implements Command {
     }
     private String getVisitorString(){
         int registeredVisitors = 0;
-        for(int i = 0; i <= reportDays.size(); i++){
+        for(int i = 0; i < reportDays.size(); i++){
             Day day = reportDays.get(i);
             registeredVisitors += day.getRegisteredVisitors();
         }
@@ -36,7 +36,7 @@ public class LibraryReport implements Command {
     }
     private String getBankString(){
         int totalBank = 0;
-        for(int i = 0; i <= reportDays.size(); i++){
+        for(int i = 0; i < reportDays.size(); i++){
             Day day = reportDays.get(i);
             totalBank += day.getTotalBankAccount();
         }
@@ -44,7 +44,7 @@ public class LibraryReport implements Command {
     }
     private String getRentedString(){
         int rentedBooks = 0;
-        for(int i = 0; i <= reportDays.size(); i++){
+        for(int i = 0; i < reportDays.size(); i++){
             Day day = reportDays.get(i);
             rentedBooks += day.getRentedBooks();
         }
@@ -52,7 +52,7 @@ public class LibraryReport implements Command {
     }
     private String getReturnedBooksString(){
         int returnedBooks = 0;
-        for(int i = 0; i <= reportDays.size(); i++){
+        for(int i = 0; i < reportDays.size(); i++){
             Day day = reportDays.get(i);
             returnedBooks += day.getBooksReturned();
         }
