@@ -24,6 +24,6 @@ public class RegisterVisitor implements Command {
     public void execute() {
         HashMap<Integer,Visitor> visitors = library.getRegisteredVisitors();
         visitors.put(id,visitor);
-        System.out.println("register,"+String.valueOf(visitor.getVisitorID())+ ",September 26th 2020");
+        System.out.println("register,"+String.valueOf(visitor.getVisitorID())+ "," +library.getPresentDate().getTime());
     }
 }

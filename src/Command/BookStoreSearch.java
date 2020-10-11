@@ -1,9 +1,11 @@
 package Command;
 
+import Command.SortStrategy.DateSort;
+import Command.SortStrategy.SortStrategy;
+import Command.SortStrategy.TitleSort;
 import Library.*;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class BookStoreSearch implements Command {
 

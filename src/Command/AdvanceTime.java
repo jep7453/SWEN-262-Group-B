@@ -1,6 +1,7 @@
 package Command;
 import Library.*;
 
+import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.util.*;
 
@@ -32,10 +33,10 @@ public class AdvanceTime implements Command {
         try {
             int days = Integer.valueOf(dayStr);
             this.simulatedDate = presentDate;
-            simulatedDate.set(Calendar.DAY_OF_MONTH, presentDate.get(Calendar.DAY_OF_MONTH) + days);
+            simulatedDate.add(Calendar.DAY_OF_MONTH, days);
             if (hourStr != null) {
                 int hours = Integer.valueOf(hourStr);
-                simulatedDate.set(Calendar.HOUR, presentDate.get(Calendar.HOUR) + hours);
+                simulatedDate.add(Calendar.HOUR,hours);
             }
         }
         catch (NumberFormatException e){
@@ -44,13 +45,13 @@ public class AdvanceTime implements Command {
         }
     }
 
-    public void execute() throws CloneNotSupportedException{
+    public void execute(){
         library.setSimulatedTime(this.simulatedDate);
-
-        HashMap<String, CheckedBook> rentedBooks = library.getRentedBooks();
+        library.updateState();
+        ArrayList<CheckedBook> rentedBooks = library.getRentedBooks();
         int overdue = 0;
-        for( CheckedBook book : rentedBooks.values()){
-            Date returnDate = book.getdueDate().getTime();
+        for( CheckedBook book : rentedBooks){
+            Date returnDate = book.getDueDate().getTime();
             if(returnDate.compareTo(library.getPresentDate().getTime()) < 0){
                 overdue++;
             }

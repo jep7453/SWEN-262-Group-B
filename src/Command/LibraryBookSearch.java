@@ -1,5 +1,9 @@
 package Command;
 
+import Command.SortStrategy.DateSort;
+import Command.SortStrategy.SortStrategy;
+import Command.SortStrategy.StatusSort;
+import Command.SortStrategy.TitleSort;
 import Library.*;
 
 import java.util.ArrayList;
@@ -50,7 +54,7 @@ public class LibraryBookSearch implements Command {
                 }
                 parameterNum++;
             }
-            if(valid && book.getCopiesAvailable() >0) {
+            if(valid) {
                 searchResults.add(book);
             }
             if(strategy!=null)
