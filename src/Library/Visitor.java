@@ -12,10 +12,12 @@ public class Visitor {
     private static String phoneNumber;
     private static int visitorID;
     private static Date visitDate;
+    private static Date startTime;
     private double fines;
     private double returnedFines;
     private double paidFines;
     private int borrowedBooks;
+    private boolean currentlyInLibrary;
 
     public Visitor(String firstName, String lastName, String address, String phoneNumber, int visitorID) {
         this.firstName=firstName;
@@ -24,10 +26,12 @@ public class Visitor {
         this.phoneNumber=phoneNumber;
         this.visitorID=visitorID;
         this.visitDate = new Date();
+        this.startTime = null;
         fines=0;
         returnedFines=0;
         paidFines=0;
         borrowedBooks=0;
+        currentlyInLibrary = false;
     }
 
     public int getVisitorID(){
@@ -61,5 +65,8 @@ public class Visitor {
     public void removeBorrowedBooks(int books) {
         borrowedBooks-=books;
     }
-
+    public boolean isCurrentlyInLibrary(){return currentlyInLibrary;}
+    public void setCurrentlyInLibrary(boolean tOrF){currentlyInLibrary = tOrF;}
+    public void setStartTime(Date date){startTime = date;}
+    public Date getStartTime(){return startTime;}
 }
