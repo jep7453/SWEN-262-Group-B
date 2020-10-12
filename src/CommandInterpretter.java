@@ -31,7 +31,7 @@ public class CommandInterpretter {
             case "register":
                command = new RegisterVisitor(library,parts[1],parts[2],parts[3],parts[4]);
                return command;
-            case "purchase":
+            case "buy":
                 ArrayList<Integer> books = new ArrayList<>();
                 int iter = 0;
                 for(String part: parts) {
@@ -125,8 +125,6 @@ public class CommandInterpretter {
                 return command;
             case "advance":
 
-                GregorianCalendar calendar = new GregorianCalendar();
-                calendar.setTime(new Date());
 
                 String advancement = parts[1] + ",";
                 /*
@@ -135,25 +133,25 @@ public class CommandInterpretter {
                 int "j" and use that int to make the skipped day objects
                  */
                 int j = currentDay.getCalender().get(Calendar.DAY_OF_MONTH);
-                for(int i = 1; i <= Integer.valueOf(parts[1]); i++){//i would be the number of days we have already advanced
+                for(int i = 1; i <= Integer.valueOf(parts[1])-1; i++){//i would be the number of days we have already advanced
 
-                    GregorianCalendar skippedDate = currentDay.getCalender();
-                    skippedDate.set(Calendar.DAY_OF_MONTH, j + i);//make sure the skipped days have the correct date
+                    GregorianCalendar skippedDate = (GregorianCalendar) currentDay.getCalender().clone();
+                    skippedDate.add(Calendar.DAY_OF_MONTH,  i);//make sure the skipped days have the correct date
                     Day skippedDayObj = new Day(skippedDate);
                     library.addToHistory(skippedDayObj);
 
                     if(i == Integer.valueOf(parts[1])){//the day we advanced to
                         if(parts.length > 2){
-                            skippedDate.set(Calendar.HOUR,skippedDate.get(Calendar.HOUR) + Integer.parseInt(parts[2]));
+                            skippedDate.add(Calendar.HOUR,skippedDate.get(Integer.parseInt(parts[2])));
                         }
                         this.currentDay = skippedDayObj;//if we advanced the correct amount of days already then set the last created date obj to current day
-                        System.out.println("Current Day:" + this.currentDay.getCalender().getTime().toString() + '\n');
+                        System.out.println("Current Day:" + skippedDate.getTime().toString() + '\n');
                     }
                 }
                 if(parts.length > 2){
                     advancement += parts[2];
                 }
-                command = new AdvanceTime(calendar,advancement,library);
+                command = new AdvanceTime(library.getPresentDate(),advancement,library);
                 return command;
             case "datetime":
                 command = new CurrentDateTime(library);
@@ -168,6 +166,23 @@ public class CommandInterpretter {
                     iter++;
                 }
                 command = new BorrowBook(library,Integer.valueOf(parts[1]),books);
+                return command;
+            case "pay":
+                command = new PayFine(library,Integer.valueOf(parts[1]),Double.valueOf(parts[2]));
+                return command;
+            case "borrowed":
+                command = new BorrowedBooksSearch(library,Integer.valueOf(parts[1]));
+                return command;
+            case "return":
+                books = new ArrayList<>();
+                iter = 0;
+                for(String part: parts) {
+                    if(iter>1) {
+                        books.add(Integer.valueOf(part));
+                    }
+                    iter++;
+                }
+                command = new ReturnBook(library,Integer.valueOf(parts[1]),books);
                 return command;
             default:
                 return null;

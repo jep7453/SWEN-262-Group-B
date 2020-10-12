@@ -1,7 +1,6 @@
 package Command;
 
-import Library.Library;
-import Library.Day;
+import Library.*;
 import java.util.ArrayList;
 
 /**
@@ -24,7 +23,7 @@ public class LibraryReport implements Command {
             Day day = reportDays.get(i);
             purchasedBooks += day.getBooksPurchased();
         }
-        return "Books Purchased: " + purchasedBooks + '\n';
+        return "Number of Books Purchased:" + purchasedBooks + '\n';
     }
     private String getVisitorString(){
         int registeredVisitors = 0;
@@ -32,7 +31,7 @@ public class LibraryReport implements Command {
             Day day = reportDays.get(i);
             registeredVisitors += day.getRegisteredVisitors();
         }
-        return "Registered Visitor Count: " + registeredVisitors + '\n';
+        return "Number of Visitors: " + registeredVisitors + '\n';
     }
     private String getBankString(){
         int totalBank = 0;
@@ -40,26 +39,23 @@ public class LibraryReport implements Command {
             Day day = reportDays.get(i);
             totalBank += day.getTotalBankAccount();
         }
-        return "Money: " + totalBank + '\n';
+        return "Fines Collected: " + totalBank + '\n';
     }
-    private String getRentedString(){
-        int rentedBooks = 0;
-        for(int i = 0; i < reportDays.size(); i++){
-            Day day = reportDays.get(i);
-            rentedBooks += day.getRentedBooks();
+
+    private String getOutstandingString(){
+        int totalOutstanding = 0;
+        for(Visitor visitor: currentLibrary.getRegisteredVisitors().values()) {
+            totalOutstanding+=visitor.getFines();
         }
-        return "Amount of Rented Books: " + rentedBooks + '\n';
+        return "Fines Outstanding: " + totalOutstanding + '\n';
     }
-    private String getReturnedBooksString(){
-        int returnedBooks = 0;
-        for(int i = 0; i < reportDays.size(); i++){
-            Day day = reportDays.get(i);
-            returnedBooks += day.getBooksReturned();
-        }
-        return "Amount of Returned Books: " + returnedBooks + '\n';
-    }
+
     private String getCollectionString(){
-        return "Current Collection Size: " + currentLibrary.getStoreCollection().size() + '\n';
+        int booksOwned = 0;
+        for(Book book:currentLibrary.getBookCollection().values()) {
+            booksOwned+=book.getCopies();
+        }
+        return "Number of Books: " + booksOwned + '\n';
     }
     private String getDateString(){
         return "Current Date: " + currentLibrary.getPresentDate().getTime().toString() + '\n';
@@ -67,12 +63,15 @@ public class LibraryReport implements Command {
     public void execute(){
         String reportString = "";
         reportString += getDateString();
-        reportString += getVisitorString();
-        reportString += getBankString();
-        reportString += getRentedString();
         reportString += getCollectionString();
+        reportString += getVisitorString();
+
         reportString += getPurchasedString();
-        reportString += getReturnedBooksString();
+        reportString += getBankString();
+        reportString += getOutstandingString();
+
+
+
         System.out.println(reportString);
     }
 }

@@ -10,13 +10,11 @@ public class Day {
     private final GregorianCalendar currentDay;
     private int registeredVisitors;
     private int totalBankAccount;
-    private int rentedBooks;
     private int booksPurchased;
-    private int booksReturned;
 
     public Day(GregorianCalendar date){
 
-        this.currentDay = date;
+        this.currentDay = (GregorianCalendar) date.clone();
     }
 
     public int getDate(){
@@ -28,16 +26,12 @@ public class Day {
             case "register":
                 this.registeredVisitors++;
                 return 1;
-            case "purchase":
-                this.booksPurchased++;
+            case "buy":
+                int booksBought=Integer.valueOf(request[1])*(request.length-2);
+                this.booksPurchased+=booksBought;
                 return 1;
-            case "rent":
-                this.rentedBooks++;
-                return 1;
-            case "return":
-                this.booksReturned++;
-                return 1;
-            case "Pay":
+
+            case "pay":
                 this.totalBankAccount += Integer.valueOf(request[2]);
                 return 1;
             default:
@@ -51,15 +45,11 @@ public class Day {
     public int getTotalBankAccount(){
         return this.totalBankAccount;
     }
-    public int getRentedBooks(){
-        return this.rentedBooks;
-    }
+
     public int getBooksPurchased(){
         return this.booksPurchased;
     }
-    public int getBooksReturned(){
-        return this.booksReturned;
-    }
+
     public GregorianCalendar getCalender(){return this.currentDay;}
 
 }

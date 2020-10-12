@@ -62,8 +62,16 @@ public class Book {
         copiesAvailable-=amount;
     }
 
+    public void returnCopy(int amount) {
+        copiesAvailable+=amount;
+    }
+
     public int getCopiesAvailable() {
         return copiesAvailable;
+    }
+
+    public int getCopies() {
+        return copies;
     }
 
     public void setReturnDate(GregorianCalendar returnDate){this.returnDate = returnDate;}

@@ -32,10 +32,10 @@ public class AdvanceTime implements Command {
         try {
             int days = Integer.valueOf(dayStr);
             this.simulatedDate = presentDate;
-            simulatedDate.set(Calendar.DAY_OF_MONTH, presentDate.get(Calendar.DAY_OF_MONTH) + days);
+            simulatedDate.add(Calendar.DAY_OF_MONTH, days);
             if (hourStr != null) {
                 int hours = Integer.valueOf(hourStr);
-                simulatedDate.set(Calendar.HOUR, presentDate.get(Calendar.HOUR) + hours);
+                simulatedDate.add(Calendar.HOUR, hours);
             }
         }
         catch (NumberFormatException e){
@@ -47,14 +47,21 @@ public class AdvanceTime implements Command {
     public void execute(){
         Day simulation = new Day(this.simulatedDate);
         library.setSimulatedTime(simulation);
+        library.updateState();
 
         ArrayList<CheckedBook> rentedBooks = library.getRentedBooks();
         int overdue = 0;
+        library.clearFines();
         for( CheckedBook book : rentedBooks){
+            book.calculateFines(library.getPresentDate());
+            library.getRegisteredVisitors().get(book.getID()).addFines(book.getFine());
             Date returnDate = book.getDueDate().getTime();
             if(returnDate.compareTo(library.getPresentDate().getTime()) < 0){
                 overdue++;
             }
+        }
+        for(Visitor visitor: library.getRegisteredVisitors().values()) {
+            System.out.println(visitor.getVisitorID() + "," + visitor.getFines());
         }
         System.out.println("Overdue Book Count: " + overdue + '\n');
     }

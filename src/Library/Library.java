@@ -14,6 +14,8 @@ public class Library implements Cloneable{
     public int totalBankAccount;
     private HashMap<String, Book> bookCollection;
     private ArrayList<CheckedBook> rentedBooks;
+    private ArrayList<CheckedBook> borrowedSearchCache;
+    private int borrowedSearchUser;
     private HashMap<String,Book> storeCollection;
     private GregorianCalendar presentDate;
     private ArrayList<Day> history;
@@ -40,6 +42,12 @@ public class Library implements Cloneable{
         if(registeredVisitors ==null)
             return 0;
         return registeredVisitors.size();
+    }
+
+    public void clearFines() {
+        for (Visitor visitor:registeredVisitors.values()) {
+            visitor.clearFines();
+        }
     }
 
     public void fillBookStore(String bookString) {
@@ -111,6 +119,14 @@ public class Library implements Cloneable{
         this.presentDate = newDayObj.getCalender();
         addToHistory(newDayObj);
     }
+    public int getBorrowedSearchUser() {return borrowedSearchUser;}
+    public void setBorrowedSearchUser(int user) { borrowedSearchUser =user;}
+    public ArrayList<CheckedBook> getBorrowedSearchCache() {
+        return borrowedSearchCache;
+    }
+    public void setBorrowedSearch(ArrayList<CheckedBook> searchResults) {
+        borrowedSearchCache = searchResults;
+    }
     public ArrayList<Book> getStoreSearch() {
         return storeSearchCache;
     }
@@ -133,7 +149,7 @@ public class Library implements Cloneable{
         return this.storeCollection;
     }
     public GregorianCalendar getPresentDate(){
-        return history.get(history.size()-1).getCalender();
+        return presentDate;
     }
     public HashMap<Integer,Visitor> getRegisteredVisitors(){
         return registeredVisitors;

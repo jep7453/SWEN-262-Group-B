@@ -57,6 +57,7 @@ public class LibraryBookSearch implements Command {
             if(valid) {
                 searchResults.add(book);
             }
+
             if(strategy!=null)
                 searchResults = strategy.sort(searchResults);
         }

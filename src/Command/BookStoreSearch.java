@@ -60,7 +60,7 @@ public class BookStoreSearch implements Command {
             library.setStoreSearch(searchResults);
             System.out.println("search,"+searchResults.size());
             for(Book foundBook: searchResults)
-                System.out.println(searchResults.indexOf(foundBook)+1+",,"+foundBook);
+                System.out.println(searchResults.indexOf(foundBook)+1+","+foundBook);
 
             }
 
