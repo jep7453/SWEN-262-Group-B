@@ -69,4 +69,6 @@ public class Visitor {
     public void setCurrentlyInLibrary(boolean tOrF){currentlyInLibrary = tOrF;}
     public void setStartTime(Date date){startTime = date;}
     public Date getStartTime(){return startTime;}
+
+    //Please Work
 }
