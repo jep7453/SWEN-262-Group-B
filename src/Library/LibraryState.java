@@ -1,13 +1,6 @@
 package Library;
 
-public abstract class LibraryState {
-
-    Library library;
-
-    LibraryState(Library library) {
-        this.library = library;
-    }
-
+public interface LibraryState {
 
     public abstract boolean borrowBook();
 }

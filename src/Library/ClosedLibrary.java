@@ -1,8 +1,10 @@
 package Library;
 
-public class ClosedLibrary extends LibraryState {
+public class ClosedLibrary implements LibraryState {
 
-    ClosedLibrary(Library library) { super(library);}
+    private final Library library;
+
+    ClosedLibrary(Library library) { this.library=library;}
 
     @Override
     public boolean borrowBook() {

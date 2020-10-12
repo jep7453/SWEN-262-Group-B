@@ -1,11 +1,12 @@
 import Command.Command;
 import Library.*;
+
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.lang.management.GarbageCollectorMXBean;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Scanner;
-
+import java.io.IOException;
+import java.io.InputStreamReader;
 /**
  * @author Jonathan Pofcher
  */
@@ -22,8 +23,8 @@ public class LMBS
 
         System.out.println("Library Book Managment System\nPlease enter a command:");
         while(true) {
-            Scanner input = new Scanner(System.in);
-            String request = input.nextLine();
+            BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+            String request = input.readLine();
 
             Command command = interpreter.interpret(library,request);
             try {
