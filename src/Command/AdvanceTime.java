@@ -48,7 +48,7 @@ public class AdvanceTime implements Command {
         Day simulation = new Day(this.simulatedDate);
         library.setSimulatedTime(simulation);
         library.updateState();
-
+        library.checkVisits();
         ArrayList<CheckedBook> rentedBooks = library.getRentedBooks();
         int overdue = 0;
         library.clearFines();

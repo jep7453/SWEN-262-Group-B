@@ -5,6 +5,7 @@ import Library.Library;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 
 /**
@@ -15,13 +16,13 @@ public class BeginVisit implements Command {
     private Library library;
     private int id;
     private Visitor visitor;
-    private Calendar cal;
+    private GregorianCalendar cal;
     private Date startTime;
 
         public BeginVisit(Library library, int id) {
         this.library = library;
         this.id = id;
-        cal = Calendar.getInstance();
+        cal = library.getPresentDate();
         startTime = cal.getTime();
         }
 
@@ -32,6 +33,9 @@ public class BeginVisit implements Command {
             System.out.println("arrive," + "invalid-id;");
         else if(visitor.isCurrentlyInLibrary())
             System.out.println("arrive," + "duplicate;");
+        else if(!library.startVisit()) {
+            System.out.println("arrive," + "library-closed;");
+        }
         else {
             visitor.setCurrentlyInLibrary(true);
             visitor.setStartTime(startTime);

@@ -60,12 +60,31 @@ public class LibraryReport implements Command {
     private String getDateString(){
         return "Current Date: " + currentLibrary.getPresentDate().getTime().toString() + '\n';
     }
+
+    private String getVisitAverage(){
+        int seconds=0;
+        int visits=0;
+        for(int i = 0; i < reportDays.size(); i++){
+            Day day = reportDays.get(i);
+            seconds += day.getVisitSeconds();
+            visits +=day.getVisitAmount();
+        }
+        if(visits!=0) {
+            seconds = seconds / (visits);
+        }
+        int secondsDuration = seconds%60;
+        int minutes = seconds/60;
+        int minutesDuration= minutes%60;
+        int hours = minutes/60;
+        return "Average Length of Visit:" + hours+":"+minutesDuration+":"+secondsDuration + '\n';
+    }
+
     public void execute(){
         String reportString = "";
         reportString += getDateString();
         reportString += getCollectionString();
         reportString += getVisitorString();
-
+        reportString += getVisitAverage();
         reportString += getPurchasedString();
         reportString += getBankString();
         reportString += getOutstandingString();

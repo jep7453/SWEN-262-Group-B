@@ -20,6 +20,7 @@ public class Library implements Cloneable{
     private GregorianCalendar presentDate;
     private ArrayList<Day> history;
     private LibraryState state;
+    private ArrayList<Integer> visitAverageSec;
 
     public Library(Day startDay) throws IOException {
         this.registeredVisitors = new HashMap<>();
@@ -29,6 +30,7 @@ public class Library implements Cloneable{
         this.rentedBooks = new ArrayList<>();
         this.presentDate = new GregorianCalendar();
         this.history = new ArrayList<>();
+        this.visitAverageSec = new ArrayList<>();
         presentDate.setTime(new Date());
         history.add(startDay);
         BufferedReader books = new BufferedReader(new FileReader("src/books.txt"));
@@ -108,6 +110,14 @@ public class Library implements Cloneable{
         }
     }
 
+    public void checkVisits() {
+        state.checkVisits();
+    }
+
+    public boolean startVisit() {
+        return state.startVisit();
+    }
+
     public ArrayList<Day> getHistory(){
 
         return this.history;
@@ -119,6 +129,29 @@ public class Library implements Cloneable{
         this.presentDate = newDayObj.getCalender();
         addToHistory(newDayObj);
     }
+
+    public void clearVisits() {
+        visitAverageSec.clear();
+    }
+
+    public void addVisit(int length) {
+        visitAverageSec.add(length);
+    }
+
+    public int getVisitInSeconds() {
+        int average = 0;
+        for (int visit : visitAverageSec) {
+            average += visit;
+        }
+        return average;
+
+    }
+
+    public int getVisitNum() {
+        return visitAverageSec.size();
+    }
+
+
     public int getBorrowedSearchUser() {return borrowedSearchUser;}
     public void setBorrowedSearchUser(int user) { borrowedSearchUser =user;}
     public ArrayList<CheckedBook> getBorrowedSearchCache() {

@@ -5,6 +5,7 @@ import Library.Library;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 
 /**
@@ -15,13 +16,14 @@ public class EndVisit implements Command {
     private Library library;
     private int id;
     private Visitor visitor;
-    private Calendar cal;
+    private GregorianCalendar cal;
     private Date endTime;
+    private Date startTime;
 
     public EndVisit(Library library, int id) {
         this.library = library;
         this.id = id;
-        cal = Calendar.getInstance();
+        cal = library.getPresentDate();
         endTime = cal.getTime();
     }
 
@@ -36,7 +38,15 @@ public class EndVisit implements Command {
         }
         else {
             visitor.setCurrentlyInLibrary(false);
-            System.out.println("depart," + String.valueOf(visitor.getVisitorID()) + "," + endTime + ";");
+            startTime = visitor.getStartTime();
+            long length =  endTime.getTime()-startTime.getTime();
+            int seconds = (int)length /1000;
+            library.addVisit(seconds);
+            int secondsDuration = seconds%60;
+            int minutes = seconds/60;
+            int minutesDuration= minutes%60;
+            int hours = minutes/60;
+            System.out.println("depart," + String.valueOf(visitor.getVisitorID()) + "," + endTime + ","+hours+":"+minutesDuration+":"+secondsDuration);
         }
     }
 }

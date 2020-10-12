@@ -26,7 +26,7 @@ public class CommandInterpretter {
             parts = request.split(",");
         }
         parts[parts.length-1]=parts[parts.length-1].substring(0,parts[parts.length-1].length()-1);
-        currentDay.updateDay(parts);//update the current day observer
+        currentDay.updateDay(parts,library);//update the current day observer
         switch (parts[0]) {
             case "register":
                command = new RegisterVisitor(library,parts[1],parts[2],parts[3],parts[4]);
@@ -120,7 +120,7 @@ public class CommandInterpretter {
                     ArrayList<Day> reportDays = new ArrayList<>();
                     ArrayList<Day> history = library.getHistory();
                     try {
-                        for (int i = 0; i <= Integer.valueOf(parts[1]); i++) {
+                        for (int i = 0; i <= Integer.valueOf(parts[1])-1; i++) {
                             reportDays.add(history.get((history.size() - 1) - i));//gets the day objects from the top of the list which is the most recent days
                         }
                     }
@@ -147,7 +147,7 @@ public class CommandInterpretter {
                     Day skippedDayObj = new Day(skippedDate);
                     library.addToHistory(skippedDayObj);
 
-                    if(i == Integer.valueOf(parts[1])){//the day we advanced to
+                    if(i == Integer.valueOf(parts[1])-1){//the day we advanced to
                         if(parts.length > 2){
                             skippedDate.add(Calendar.HOUR,skippedDate.get(Integer.parseInt(parts[2])));
                         }

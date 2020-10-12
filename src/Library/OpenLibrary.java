@@ -10,4 +10,14 @@ public class OpenLibrary implements LibraryState {
     public boolean borrowBook() {
         return true;
     }
+
+    @Override
+    public boolean startVisit() {
+        return true;
+    }
+
+    @Override
+    public void checkVisits() {
+
+    }
 }
