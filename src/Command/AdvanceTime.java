@@ -60,9 +60,6 @@ public class AdvanceTime implements Command {
                 overdue++;
             }
         }
-        for(Visitor visitor: library.getRegisteredVisitors().values()) {
-            System.out.println(visitor.getVisitorID() + "," + visitor.getFines());
-        }
         System.out.println("Overdue Book Count: " + overdue + '\n');
     }
 }
