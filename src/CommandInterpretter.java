@@ -31,6 +31,13 @@ public class CommandInterpretter {
             case "register":
                command = new RegisterVisitor(library,parts[1],parts[2],parts[3],parts[4]);
                return command;
+            case "arrive":
+                command = new BeginVisit(library,Integer.valueOf(parts[1]));
+                return command;
+            case "depart":
+                command = new EndVisit(library,Integer.valueOf(parts[1]));
+                return command;
+
             case "buy":
                 ArrayList<Integer> books = new ArrayList<>();
                 int iter = 0;
