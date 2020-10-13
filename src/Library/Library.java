@@ -129,6 +129,9 @@ public class Library implements Cloneable{
         this.presentDate = newDayObj.getCalender();
         addToHistory(newDayObj);
     }
+    public void setSimulatedTime(GregorianCalendar cal){
+        this.presentDate = cal;
+    }
 
     public void clearVisits() {
         visitAverageSec.clear();

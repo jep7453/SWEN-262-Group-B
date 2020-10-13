@@ -140,7 +140,7 @@ public class CommandInterpretter {
                 int "j" and use that int to make the skipped day objects
                  */
                 int j = currentDay.getCalender().get(Calendar.DAY_OF_MONTH);
-                for(int i = 1; i <= Integer.valueOf(parts[1])-1; i++){//i would be the number of days we have already advanced
+                for(int i = 0; i <= Integer.valueOf(parts[1])-1; i++){//i would be the number of days we have already advanced
 
                     GregorianCalendar skippedDate = (GregorianCalendar) currentDay.getCalender().clone();
                     skippedDate.add(Calendar.DAY_OF_MONTH,  i);//make sure the skipped days have the correct date
@@ -152,8 +152,11 @@ public class CommandInterpretter {
                             skippedDate.add(Calendar.HOUR,skippedDate.get(Integer.parseInt(parts[2])));
                         }
                         this.currentDay = skippedDayObj;//if we advanced the correct amount of days already then set the last created date obj to current day
-                        System.out.println("Current Day:" + skippedDate.getTime().toString() + '\n');
+                        GregorianCalendar current = (GregorianCalendar) skippedDate.clone();
+                        System.out.println("Current Day:" + library.getPresentDate().getTime().toString() + '\n');
                     }
+
+
                 }
                 if(parts.length > 2){
                     advancement += parts[2];

@@ -45,8 +45,13 @@ public class AdvanceTime implements Command {
     }
 
     public void execute(){
-        Day simulation = new Day(this.simulatedDate);
-        library.setSimulatedTime(simulation);
+        if(library.getPresentDate().get(Calendar.DAY_OF_MONTH)!=simulatedDate.get(Calendar.DAY_OF_MONTH)) {
+            Day simulation = new Day(this.simulatedDate);
+            library.setSimulatedTime(simulation);
+        }
+        else {
+            library.setSimulatedTime(simulatedDate);
+        }
         library.updateState();
         library.checkVisits();
         ArrayList<CheckedBook> rentedBooks = library.getRentedBooks();

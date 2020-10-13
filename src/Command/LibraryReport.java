@@ -80,6 +80,7 @@ public class LibraryReport implements Command {
     }
 
     public void execute(){
+        System.out.println(currentLibrary.getHistory().size());
         String reportString = "";
         reportString += getDateString();
         reportString += getCollectionString();
