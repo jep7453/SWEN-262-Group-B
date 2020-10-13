@@ -28,9 +28,6 @@ public class RegisterVisitor implements Command {
             System.out.println("arrive," + "duplicate;");
         else {
             visitors.put(id, visitor);
-            for(Visitor dude:visitors.values()) {
-                System.out.println(dude.getVisitorID());
-            }
             System.out.println("register," + String.valueOf(visitor.getVisitorID()) + "," + cal.getTime() + ";");
         }
     }
