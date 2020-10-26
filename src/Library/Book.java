@@ -1,9 +1,10 @@
 package Library;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-public class Book {
+public class Book implements Serializable {
 
     private  String title;
     private  ArrayList<String> authors;

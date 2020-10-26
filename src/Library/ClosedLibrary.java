@@ -1,10 +1,11 @@
 package Library;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class ClosedLibrary implements LibraryState {
+public class ClosedLibrary implements LibraryState, Serializable {
 
     private final Library library;
 

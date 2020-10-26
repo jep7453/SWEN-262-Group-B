@@ -1,6 +1,8 @@
 package Library;
 
-public class OpenLibrary implements LibraryState {
+import java.io.Serializable;
+
+public class OpenLibrary implements LibraryState, Serializable {
 
     private final Library library;
 

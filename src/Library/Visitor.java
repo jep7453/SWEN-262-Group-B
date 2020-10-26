@@ -1,10 +1,11 @@
 package Library;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Visitor {
+public class Visitor implements Serializable {
 
     private String firstName;
     private String lastName;

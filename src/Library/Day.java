@@ -1,12 +1,13 @@
 package Library;
 
+import java.io.Serializable;
 import java.util.*;
 import Library.*;
 
 /**
  * @author :Zuri Shaw
  */
-public class Day {
+public class Day implements Serializable {
 
     private final GregorianCalendar currentDay;
     private int registeredVisitors;

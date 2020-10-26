@@ -3,15 +3,15 @@ package Library;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.*;
 
-public class Library implements Cloneable{
+public class Library implements Serializable {
 
     private ArrayList<Book> librarySearchCache;
     private ArrayList<Book> storeSearchCache;
     private HashMap<Integer,Visitor> registeredVisitors;
-    public int totalBankAccount;
     private HashMap<String, Book> bookCollection;
     private ArrayList<CheckedBook> rentedBooks;
     private ArrayList<CheckedBook> borrowedSearchCache;
@@ -24,7 +24,6 @@ public class Library implements Cloneable{
 
     public Library(Day startDay) throws IOException {
         this.registeredVisitors = new HashMap<>();
-        this.totalBankAccount = 0;
         this.bookCollection = new HashMap<>();
         this.storeCollection = new HashMap<>();
         this.rentedBooks = new ArrayList<>();

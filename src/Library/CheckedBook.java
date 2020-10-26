@@ -1,9 +1,10 @@
 package Library;
 
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 
 
-public class CheckedBook {
+public class CheckedBook implements Serializable {
     private Book book;
     private int visitorID;
     private GregorianCalendar dueDate;
