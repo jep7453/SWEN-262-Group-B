@@ -152,10 +152,8 @@ public class CommandInterpretter {
                             skippedDate.add(Calendar.HOUR,skippedDate.get(Integer.parseInt(parts[2])));
                         }
                         this.currentDay = skippedDayObj;//if we advanced the correct amount of days already then set the last created date obj to current day
-                        GregorianCalendar current = (GregorianCalendar) skippedDate.clone();
-                        System.out.println("Current Day:" + library.getPresentDate().getTime().toString() + '\n');
-                    }
 
+                    }
 
                 }
                 if(parts.length > 2){
@@ -193,6 +191,9 @@ public class CommandInterpretter {
                     iter++;
                 }
                 command = new ReturnBook(library,Integer.valueOf(parts[1]),books);
+                return command;
+            case "quit":
+                command = new Quit(library);
                 return command;
             default:
                 return null;
