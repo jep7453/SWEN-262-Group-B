@@ -16,6 +16,15 @@ public class Book implements Serializable {
     private int copiesAvailable;
     private GregorianCalendar returnDate;
 
+    /**
+     * Constructor for book object
+     * @param title
+     * @param authors
+     * @param ISBN
+     * @param publisher
+     * @param date
+     * @param pages
+     */
     public Book(String title, ArrayList<String> authors, String ISBN, String publisher, String date, int pages) {
         this.title=title;
         this.authors=authors;
@@ -28,24 +37,52 @@ public class Book implements Serializable {
         this.returnDate = null;
     }
 
+    /**
+     *
+     * @return the ISBN #
+     */
     public String getISBN() {
         return ISBN;
     }
 
+    /**
+     *
+     * @return the title of the book
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     *
+     * @return the publisher of the book
+     */
     public String getPublisher() {
         return publisher;
     }
 
+    /**
+     *
+     * @return the published date of the book
+     */
     public String getDate() {  return date; }
 
+    /**
+     *
+     * @return # of pages in the book
+     */
     public int getPages() {  return pages; }
 
+    /**
+     *
+     * @return list of authors for the book
+     */
     public ArrayList<String> getAuthors() { return authors;}
 
+    /**
+     * Turns the list of authors into a string
+     * @return authors of the book as one string
+     */
     public String getAuthorsString() {
         String authorsString = "";
         for(String author:authors) {
@@ -54,36 +91,63 @@ public class Book implements Serializable {
         return "{"+ authorsString + "}";
     }
 
+    /**
+     * Adds a copy of the book
+     * @param amount of copies to add
+     */
     public void addCopies(int amount) {
         copies+=amount;
         copiesAvailable+=amount;
     }
 
+    /**
+     * Removes a copy from the available ones
+     * @param amount of copies to borrow
+     */
     public void borrowCopy(int amount) {
         copiesAvailable-=amount;
     }
 
+    /**
+     * Adds a copy to the available ones
+     * @param amount of copies to return
+     */
     public void returnCopy(int amount) {
         copiesAvailable+=amount;
     }
 
+    /**
+     *
+     * @return amount of available copies of the book
+     */
     public int getCopiesAvailable() {
         return copiesAvailable;
     }
 
+    /**
+     *
+     * @return amount of total copies of the book
+     */
     public int getCopies() {
         return copies;
     }
 
-    public void setReturnDate(GregorianCalendar returnDate){this.returnDate = returnDate;}
-    public GregorianCalendar getReturnDate(){return returnDate;}
 
+    /**
+     *
+     * @return information of the book as a string
+     */
     @Override
     public String toString() {
         String book = ISBN + "," + title + "," + getAuthorsString() + "," + publisher + "," + date + "," + pages;
         return book;
     }
 
+    /**
+     *
+     * @param obj
+     * @return if the input object is equal to this book
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {

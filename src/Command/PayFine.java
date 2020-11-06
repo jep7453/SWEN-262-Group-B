@@ -13,7 +13,12 @@ public class PayFine implements Command {
     private double amount;
 
 
-
+    /**
+     * Constructor for PayFine commands
+     * @param library
+     * @param id
+     * @param amount
+     */
     public PayFine(Library library, int id, double amount) {
         this.library = library;
         this.visitor=library.getRegisteredVisitors().get(id);
@@ -21,6 +26,10 @@ public class PayFine implements Command {
 
     }
 
+    /**
+     * Command execute function
+     * Lowers fines by the specified amount for a user
+     */
     public void execute() {
         if (!library.getRegisteredVisitors().containsValue(visitor)) {
             System.out.println("pay,invalid-visitor-id;");

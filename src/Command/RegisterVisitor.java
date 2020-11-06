@@ -15,6 +15,14 @@ public class RegisterVisitor implements Command {
     private int id;
     private GregorianCalendar cal;
 
+    /**
+     * Constructor for RegisterVisitor commands
+     * @param library
+     * @param firstName
+     * @param lastName
+     * @param address
+     * @param phoneNumber
+     */
     public RegisterVisitor(Library library, String firstName,String lastName,String address,String phoneNumber) {
         this.library = library;
         this.id =1000000000+ library.visitorsLength();
@@ -22,6 +30,10 @@ public class RegisterVisitor implements Command {
         cal = library.getPresentDate();
     }
 
+    /**
+     * Command execute function
+     * Adds a user to the libraries registered users
+     */
     public void execute() {
         HashMap<Integer,Visitor> visitors = library.getRegisteredVisitors();
         if(visitors.get(id) != null)

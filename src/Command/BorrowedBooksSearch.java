@@ -13,7 +13,11 @@ public class BorrowedBooksSearch implements Command {
     private Visitor visitor;
     private ArrayList<CheckedBook> rentedBooks;
 
-
+    /**
+     * Constructor for the BorrowedBookSearch command
+     * @param library
+     * @param id
+     */
     public BorrowedBooksSearch(Library library,int id) {
         this.id = id;
         this.library=library;
@@ -21,6 +25,10 @@ public class BorrowedBooksSearch implements Command {
         this.visitor=library.getRegisteredVisitors().get(id);
     }
 
+    /**
+     * Command execute function
+     * Saves and prints a list of borrowed books for a specified user
+     */
     public void execute() {
         if (!library.getRegisteredVisitors().containsValue(visitor)) {
             System.out.println("borrowed,invalid-visitor-id;");

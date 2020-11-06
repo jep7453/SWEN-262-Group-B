@@ -11,13 +11,22 @@ public class PurchaseBook implements Command {
     private ArrayList<Integer> books;
     private Library library;
 
-
+    /**
+     * Constructor for PurchaseBook commands
+     * @param library
+     * @param quantity amount of each book to buy
+     * @param books list of books to buy by ID from previous BookStoreSearch
+     */
     public PurchaseBook(Library library, int quantity, ArrayList<Integer> books) {
         this.quantity = quantity;
         this.books = books;
         this.library=library;
     }
 
+    /**
+     * Command execute function
+     * Adds books to the library catalog from the specified ID from the last BookStoreSearch
+     */
     public void execute() {
         ArrayList<Book> bookLibrary = new ArrayList<>(library.getBookCollection().values());
         ArrayList<Book> bookStore = library.getStoreSearch();

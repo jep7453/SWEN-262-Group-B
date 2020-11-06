@@ -9,10 +9,20 @@ public class CommandInterpretter {
 
     private Day currentDay;
 
+    /**
+     * Constructor for the CommandInterpretter Object
+     * @param startDay Day object the day LBMS is first run
+     */
     public CommandInterpretter(Day startDay) {
         this.currentDay = startDay;
     }
 
+    /**
+     * Parses the users input request and creates the appropriate command to return
+     * @param library
+     * @param request the input reqest as a string
+     * @return the proper command object
+     */
     public Command interpret(Library library, String request) {
         Command command;
         String[] parts = request.split(",");

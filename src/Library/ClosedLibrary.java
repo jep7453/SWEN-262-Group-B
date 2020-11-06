@@ -9,18 +9,33 @@ public class ClosedLibrary implements LibraryState, Serializable {
 
     private final Library library;
 
+    /**
+     * Constructor for CLosedLibrary object
+     * @param library
+     */
     ClosedLibrary(Library library) { this.library=library;}
 
+    /**
+     * returns false as books cannot be checked out when closed
+     * @return false
+     */
     @Override
     public boolean borrowBook() {
         return false;
     }
 
+    /**
+     * returns false as visits cannot be started when closed
+     * @return false
+     */
     @Override
     public boolean startVisit() {
         return false;
     }
 
+    /**
+     * ends visits and recording their length when the library is closed
+     */
     @Override
     public void checkVisits() {
         GregorianCalendar closingTime = (GregorianCalendar) library.getPresentDate().clone();

@@ -14,7 +14,12 @@ public class BorrowBook implements Command {
     private GregorianCalendar dueDate;
     private GregorianCalendar currentDate;
 
-
+    /**
+     * Constructor for BorrowBook command
+     * @param library
+     * @param id
+     * @param books list of books to borrow by ID from previous LibraryBookSearch
+     */
     public BorrowBook(Library library, int id, ArrayList<Integer> books) {
         this.id = id;
         this.books = books;
@@ -24,6 +29,10 @@ public class BorrowBook implements Command {
         dueDate.add(Calendar.DAY_OF_MONTH,7);
     }
 
+    /**
+     * Command execute function
+     * Creates a CheckedBook for the requested books to borrow, adds it to the library and updates the user
+     */
     public void execute() {
         ArrayList<Book> librarySearch = library.getLibrarySearch();
         ArrayList<Integer> invalidBooks = new ArrayList<>();

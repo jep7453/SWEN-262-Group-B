@@ -12,12 +12,20 @@ public class BookStoreSearch implements Command {
      private ArrayList<String> search;
      private Library library;
 
-
+    /**
+     * Constructor for BookStoreSearch command
+     * @param library
+     * @param search String of specified criteria for the search
+     */
      public BookStoreSearch(Library library, ArrayList<String> search) {
          this.search = search;
          this.library=library;
      }
 
+    /**
+     * Command execute function
+     * Parses the search criteria against the list of books in the bookstore catalog, saving and printing those that fit
+     */
         public void execute() {
             ArrayList<Book> bookLibrary = new ArrayList<>(library.getStoreCollection().values());
             ArrayList<Book> searchResults = new ArrayList<Book>();

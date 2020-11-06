@@ -57,14 +57,14 @@ public class LMBS {
 
 
 
-        CommandInterpretter interpreter = new CommandInterpretter(startDayObv);
+        CommandInterpretter commandInterpreter = new CommandInterpretter(startDayObv);
 
         System.out.println("Library Book Managment System\nPlease enter a command:");
         while(true) {
             BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
             String request = input.readLine();
 
-            Command command = interpreter.interpret(library,request);
+            Command command = commandInterpreter.interpret(library,request);
             try {
                 command.execute();
                 FileOutputStream fileOutputStream = null;

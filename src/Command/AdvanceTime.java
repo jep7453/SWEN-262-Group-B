@@ -14,6 +14,12 @@ public class AdvanceTime implements Command {
     private GregorianCalendar simulatedDate;
     private final Library library;
 
+    /**
+     * Constructor for AdvanceTime command
+     * @param present Current date
+     * @param advancement User requested advancement
+     * @param library
+     */
     public AdvanceTime(GregorianCalendar present, String advancement, Library library){//advancement should be "[days] [hours]" Ex. "5,10"
         this.library = library;
         this.presentDate = present;
@@ -28,6 +34,11 @@ public class AdvanceTime implements Command {
         simulatedDate.setLenient(true);
     }
 
+    /**
+     * Sets the current date forward the request time
+     * @param dayStr amount of days to advance
+     * @param hourStr amount of hours to advance
+     */
     public void setSimulatedDate(String dayStr, String hourStr){
         try {
             int days = Integer.valueOf(dayStr);
@@ -44,6 +55,10 @@ public class AdvanceTime implements Command {
         }
     }
 
+    /**
+     * Command execute function
+     * Sets the library current date to the advanced one, and accounts for overdue books and library closing
+     */
     public void execute(){
         if(library.getPresentDate().get(Calendar.DAY_OF_MONTH)!=simulatedDate.get(Calendar.DAY_OF_MONTH)) {
             Day simulation = new Day(this.simulatedDate);

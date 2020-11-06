@@ -20,6 +20,11 @@ public class EndVisit implements Command {
     private Date endTime;
     private Date startTime;
 
+    /**
+     * Constrcutor for the EndVisit command
+     * @param library
+     * @param id
+     */
     public EndVisit(Library library, int id) {
         this.library = library;
         this.id = id;
@@ -27,6 +32,10 @@ public class EndVisit implements Command {
         endTime = cal.getTime();
     }
 
+    /**
+     * Command execute function
+     * Ends a specified users visit, and records its length
+     */
     public void execute() {
         HashMap<Integer, Visitor> visitors = library.getRegisteredVisitors();
         visitor = visitors.get(id);

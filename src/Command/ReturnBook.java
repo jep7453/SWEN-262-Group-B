@@ -14,7 +14,12 @@ public class ReturnBook implements Command {
     private GregorianCalendar dueDate;
     private GregorianCalendar currentDate;
 
-
+    /**
+     * Constructor for ReturnBook commands
+     * @param library
+     * @param id
+     * @param books list of books to return by ID from previous BorrowedBookSearch
+     */
     public ReturnBook(Library library, int id, ArrayList<Integer> books) {
         this.id = id;
         this.books = books;
@@ -22,6 +27,10 @@ public class ReturnBook implements Command {
         this.currentDate = library.getPresentDate();
     }
 
+    /**
+     * Command execute function
+     * Returns checked out books for a user, adding any overdue fines to them
+     */
     public void execute() {
         ArrayList<CheckedBook> borrowedSearch = library.getBorrowedSearchCache();
         ArrayList<CheckedBook> overDue = new ArrayList<>();

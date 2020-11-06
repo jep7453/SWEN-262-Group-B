@@ -16,15 +16,21 @@ public class Day implements Serializable {
     private int visitSeconds;
     private int visitAmount;
 
+    /**
+     * Constructor for Day object
+     * @param date of the day this object is for
+     */
     public Day(GregorianCalendar date){
 
         this.currentDay = (GregorianCalendar) date.clone();
     }
 
-    public int getDate(){
-        return currentDay.get(Calendar.DAY_OF_MONTH);
-    }
-
+    /**
+     * Adds statistical information to the day
+     * @param request
+     * @param library
+     * @return whether request was valid or not
+     */
     public int updateDay(String[] request,Library library){
         switch (request[0]){
             case "depart":
@@ -52,23 +58,51 @@ public class Day implements Serializable {
                 return 0;
         }
     }
+
+    /**
+     *
+     * @return amount of visitors registered on this day
+     */
     public int getRegisteredVisitors(){
         return this.registeredVisitors;
     }
+
+    /**
+     *
+     * @return amount of fines due on this day
+     */
     public int getTotalBankAccount(){
         return this.totalBankAccount;
     }
 
+    /**
+     *
+     * @return amount of books purchased on this day
+     */
     public int getBooksPurchased(){
         return this.booksPurchased;
     }
+
+    /**
+     *
+     * @return total seconds of visits on this day
+     */
     public int getVisitSeconds(){
         return this.visitSeconds;
     }
+
+    /**
+     *
+     * @return number of visits on this day
+     */
     public int getVisitAmount(){
         return this.visitAmount;
     }
 
+    /**
+     *
+     * @return the date of this day
+     */
     public GregorianCalendar getCalender(){return this.currentDay;}
 
 }

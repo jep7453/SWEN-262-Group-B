@@ -19,6 +19,11 @@ public class BeginVisit implements Command {
     private GregorianCalendar cal;
     private Date startTime;
 
+    /**
+     * Constructor for BeginVisit Command
+     * @param library
+     * @param id
+     */
         public BeginVisit(Library library, int id) {
         this.library = library;
         this.id = id;
@@ -26,6 +31,10 @@ public class BeginVisit implements Command {
         startTime = cal.getTime();
         }
 
+    /**
+     * Command execute function
+     * Starts recording the specified user's visit
+     */
         public void execute() {
         HashMap<Integer,Visitor> visitors = library.getRegisteredVisitors();
         visitor = visitors.get(id);
