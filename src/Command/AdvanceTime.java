@@ -79,6 +79,7 @@ public class AdvanceTime implements Command {
                 overdue++;
             }
         }
+        System.out.println("Current Day:" + library.getPresentDate().getTime().toString());
         System.out.println("Overdue Book Count: " + overdue + '\n');
     }
 }
