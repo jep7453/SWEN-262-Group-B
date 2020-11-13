@@ -11,7 +11,7 @@ import java.io.IOException;
  */
 public class LMBS {
 
-    public static void main(String[] args) throws IOException, CloneNotSupportedException {
+    public static void main(String[] args) throws IOException{
 
 
         //creates the first day observer and gives it to the library constructor
@@ -22,8 +22,8 @@ public class LMBS {
 
 
         Library library =null;
-        FileInputStream fileInputStream = null;
-        ObjectInputStream objectInputStream = null;
+        FileInputStream fileInputStream;
+        ObjectInputStream objectInputStream ;
         try
         {
             fileInputStream = new FileInputStream(serializeFileName);
@@ -67,8 +67,8 @@ public class LMBS {
             Command command = commandInterpreter.interpret(library,request);
             try {
                 command.execute();
-                FileOutputStream fileOutputStream = null;
-                ObjectOutputStream objectOutputStream = null;
+                FileOutputStream fileOutputStream;
+                ObjectOutputStream objectOutputStream;
                 try
                 {
                     fileOutputStream = new FileOutputStream(serializeFileName);

@@ -28,8 +28,7 @@ public class LibraryReport implements Command {
      */
     private String getPurchasedString(){
         int purchasedBooks = 0;
-        for(int i = 0; i < reportDays.size(); i++){
-            Day day = reportDays.get(i);
+        for (Day day : reportDays) {
             purchasedBooks += day.getBooksPurchased();
         }
         return "Number of Books Purchased:" + purchasedBooks + '\n';
@@ -41,8 +40,7 @@ public class LibraryReport implements Command {
      */
     private String getVisitorString(){
         int registeredVisitors = 0;
-        for(int i = 0; i < reportDays.size(); i++){
-            Day day = reportDays.get(i);
+        for (Day day : reportDays) {
             registeredVisitors += day.getRegisteredVisitors();
         }
         return "Number of Visitors: " + registeredVisitors + '\n';
@@ -54,8 +52,7 @@ public class LibraryReport implements Command {
      */
     private String getBankString(){
         int totalBank = 0;
-        for(int i = 0; i < reportDays.size(); i++){
-            Day day = reportDays.get(i);
+        for (Day day : reportDays) {
             totalBank += day.getTotalBankAccount();
         }
         return "Fines Collected: " + totalBank + '\n';
@@ -100,10 +97,9 @@ public class LibraryReport implements Command {
     private String getVisitAverage(){
         int seconds=0;
         int visits=0;
-        for(int i = 0; i < reportDays.size(); i++){
-            Day day = reportDays.get(i);
+        for (Day day : reportDays) {
             seconds += day.getVisitSeconds();
-            visits +=day.getVisitAmount();
+            visits += day.getVisitAmount();
         }
         if(visits!=0) {
             seconds = seconds / (visits);

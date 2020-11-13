@@ -54,7 +54,7 @@ public class CheckedBook implements Serializable {
     public void calculateFines(GregorianCalendar currentDate) {
         int fine = 0;
         long days = currentDate.getTime().getTime() - dueDate.getTime().getTime();
-        int daysDiff =(int) (days / (1000 * 60 * 60 * 24));;
+        int daysDiff =(int) (days / (1000 * 60 * 60 * 24));
         if(daysDiff>0) {
             fine+=10;
         }

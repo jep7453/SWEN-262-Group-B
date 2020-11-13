@@ -34,10 +34,6 @@ public class Day implements Serializable {
     public int updateDay(String[] request,Library library){
         switch (request[0]){
             case "depart":
-                this.visitSeconds+=library.getVisitInSeconds();
-                this.visitAmount+=library.getVisitNum();
-                library.clearVisits();
-                return 1;
             case "advance":
                 this.visitSeconds+=library.getVisitInSeconds();
                 this.visitAmount+=library.getVisitNum();
