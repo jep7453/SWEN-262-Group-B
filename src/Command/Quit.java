@@ -13,8 +13,10 @@ public class Quit implements Command{
 
     public void execute(){
         for(Visitor visitor : library.getRegisteredVisitors().values()){
-            Command endVisit = new EndVisit(library, visitor.getVisitorID());
-            endVisit.execute();
+            if(visitor.isCurrentlyInLibrary()) {
+                Command endVisit = new EndVisit(library, visitor.getVisitorID());
+                endVisit.execute();
+            }
         }
         System.out.println("Library has closed and program is ready for shutdown" + '\n');
     }
