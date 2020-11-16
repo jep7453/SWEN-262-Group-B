@@ -30,16 +30,19 @@ public class PayFine implements Command {
      * Command execute function
      * Lowers fines by the specified amount for a user
      */
-    public void execute() {
+    public String execute() {
         if (!library.getRegisteredVisitors().containsValue(visitor)) {
             System.out.println("pay,invalid-visitor-id;");
+            return "pay,invalid-visitor-id;";
         }
         else if(amount<0 || amount>visitor.getFines()) {
             System.out.println("pay,invalid-amount,"+amount+","+visitor.getFines());
+            return "pay,invalid-amount,"+amount+","+visitor.getFines();
         }
         else {
             visitor.removeFines(amount);
             System.out.println("pay,success," + amount);
+            return "pay,success," + amount;
         }
     }
 }

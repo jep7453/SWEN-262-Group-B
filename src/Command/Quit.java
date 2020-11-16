@@ -11,7 +11,7 @@ public class Quit implements Command{
         this.library = library;
     }
 
-    public void execute(){
+    public String execute(){
         for(Visitor visitor : library.getRegisteredVisitors().values()){
             if(visitor.isCurrentlyInLibrary()) {
                 Command endVisit = new EndVisit(library, visitor.getVisitorID());
@@ -19,5 +19,6 @@ public class Quit implements Command{
             }
         }
         System.out.println("Library has closed and program is ready for shutdown" + '\n');
+        return "Library has closed and program is ready for shutdown" + '\n';
     }
 }

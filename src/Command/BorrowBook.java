@@ -32,11 +32,12 @@ public class BorrowBook implements Command {
      * Command execute function
      * Creates a CheckedBook for the requested books to borrow, adds it to the library and updates the user
      */
-    public void execute() {
+    public String execute() {
         ArrayList<Book> librarySearch = library.getLibrarySearch();
         ArrayList<Integer> invalidBooks = new ArrayList<>();
         if(!library.borrowBook()) {
             System.out.println("borrow,library-closed;");
+            return "borrow,library-closed;";
         }
         else {
             for (Integer book : books) {
@@ -48,15 +49,21 @@ public class BorrowBook implements Command {
             }
             if (!library.getRegisteredVisitors().containsKey(id)) {
                 System.out.println("borrow,invalid-visitor-id;");
+                return "borrow,invalid-visitor-id;";
             } else if (library.getRegisteredVisitors().get(id).getFines() != 0) {
                 System.out.println("borrow,outstanding-fine," + library.getRegisteredVisitors().get(id).getFines() + ";");
+                return "borrow,outstanding-fine," + library.getRegisteredVisitors().get(id).getFines() + ";";
             } else if (library.getRegisteredVisitors().get(id).getBorrowedBooks() >= 5) {
                 System.out.println("borrow,book-limit-exceeded;");
+                return "borrow,book-limit-exceeded;";
             } else if (invalidBooks.size() != 0) {
+                String returnString = "borrow,invalid-book-id";
                 System.out.print("borrow,invalid-book-id");
                 for (Integer book : invalidBooks) {
+                    returnString=returnString+"," + book;
                     System.out.print("," + book);
                 }
+                return returnString;
             } else {
                 for (Integer book : books) {
                     Book borrowedBook = librarySearch.get(book - 1);
@@ -66,6 +73,7 @@ public class BorrowBook implements Command {
                     library.getRegisteredVisitors().get(id).addBorrowedBooks(1);
                 }
                 System.out.println("borrow," + dueDate.getTime());
+                return "borrow," + dueDate.getTime();
             }
         }
 

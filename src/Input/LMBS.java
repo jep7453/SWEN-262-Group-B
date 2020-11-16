@@ -1,3 +1,5 @@
+package Input;
+
 import Command.Command;
 import Library.*;
 

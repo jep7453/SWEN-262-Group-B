@@ -36,14 +36,16 @@ public class EndVisit implements Command {
      * Command execute function
      * Ends a specified users visit, and records its length
      */
-    public void execute() {
+    public String execute() {
         HashMap<Integer, Visitor> visitors = library.getRegisteredVisitors();
         visitor = visitors.get(id);
         if(visitor == null) {
             System.out.println("arrive," + "invalid-id;");
+            return "arrive," + "invalid-id;";
         }
         else if(!visitor.isCurrentlyInLibrary()) {
             System.out.println("arrive," + "invalid-id;");
+            return "arrive," + "invalid-id;";
         }
         else {
             visitor.setCurrentlyInLibrary(false);
@@ -56,6 +58,7 @@ public class EndVisit implements Command {
             int minutesDuration= minutes%60;
             int hours = minutes/60;
             System.out.println("depart," + String.valueOf(visitor.getVisitorID()) + "," + endTime + ","+hours+":"+minutesDuration+":"+secondsDuration);
+            return "depart," + String.valueOf(visitor.getVisitorID()) + "," + endTime + ","+hours+":"+minutesDuration+":"+secondsDuration;
         }
     }
 }

@@ -34,13 +34,16 @@ public class RegisterVisitor implements Command {
      * Command execute function
      * Adds a user to the libraries registered users
      */
-    public void execute() {
+    public String execute() {
         HashMap<Integer,Visitor> visitors = library.getRegisteredVisitors();
-        if(visitors.get(id) != null)
+        if(visitors.get(id) != null) {
             System.out.println("arrive," + "duplicate;");
+            return "arrive," + "duplicate;";
+        }
         else {
             visitors.put(id, visitor);
             System.out.println("register," + String.valueOf(visitor.getVisitorID()) + "," + cal.getTime() + ";");
+            return "register," + String.valueOf(visitor.getVisitorID()) + "," + cal.getTime() + ";";
         }
     }
 }

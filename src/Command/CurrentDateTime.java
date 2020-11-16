@@ -26,7 +26,8 @@ public class CurrentDateTime implements Command {
      * Command execute function
      * Gets and prints the current date and time
      */
-    public void execute() {
+    public String execute() {
         System.out.println("datetime,"+date.getTime());
+        return "datetime,"+date.getTime();
     }
 }

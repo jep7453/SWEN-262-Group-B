@@ -27,7 +27,7 @@ public class LibraryBookSearch implements Command {
      * Command execute function
      * Parses the search criteria against the list of books in the library catalog, saving and printing those that fit
      */
-    public void execute() {
+    public String execute() {
         ArrayList<Book> bookLibrary = new ArrayList<>(library.getBookCollection().values());
         ArrayList<Book> searchResults = new ArrayList<Book>();
         SortStrategy strategy = null;
@@ -71,8 +71,12 @@ public class LibraryBookSearch implements Command {
         }
         library.setLibrarySearch(searchResults);
         System.out.println("info,"+searchResults.size());
-        for(Book foundBook: searchResults)
-            System.out.println(searchResults.indexOf(foundBook)+1+","+Integer.valueOf(foundBook.getCopiesAvailable())+","+foundBook);
+        String returnString = "info,"+searchResults.size();
+        for(Book foundBook: searchResults) {
+            returnString = returnString + searchResults.indexOf(foundBook) + 1 + "," + Integer.valueOf(foundBook.getCopiesAvailable()) + "," + foundBook + '\n';
+            System.out.println(searchResults.indexOf(foundBook) + 1 + "," + Integer.valueOf(foundBook.getCopiesAvailable()) + "," + foundBook);
+        }
+        return returnString;
 
     }
 

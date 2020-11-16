@@ -35,20 +35,26 @@ public class BeginVisit implements Command {
      * Command execute function
      * Starts recording the specified user's visit
      */
-        public void execute() {
+        public String execute() {
         HashMap<Integer,Visitor> visitors = library.getRegisteredVisitors();
         visitor = visitors.get(id);
-        if(visitor == null)
+        if(visitor == null) {
             System.out.println("arrive," + "invalid-id;");
-        else if(visitor.isCurrentlyInLibrary())
+            return "arrive," + "invalid-id;";
+        }
+        else if(visitor.isCurrentlyInLibrary()) {
             System.out.println("arrive," + "duplicate;");
+            return "arrive," + "duplicate;";
+        }
         else if(!library.startVisit()) {
             System.out.println("arrive," + "library-closed;");
+            return "arrive," + "library-closed;";
         }
         else {
             visitor.setCurrentlyInLibrary(true);
             visitor.setStartTime(startTime);
             System.out.println("arrive," + String.valueOf(visitor.getVisitorID()) + "," + startTime + ";");
+            return "arrive," + String.valueOf(visitor.getVisitorID()) + "," + startTime + ";";
             }
         }
 }

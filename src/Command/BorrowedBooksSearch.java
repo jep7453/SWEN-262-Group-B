@@ -29,9 +29,10 @@ public class BorrowedBooksSearch implements Command {
      * Command execute function
      * Saves and prints a list of borrowed books for a specified user
      */
-    public void execute() {
+    public String execute() {
         if (!library.getRegisteredVisitors().containsValue(visitor)) {
             System.out.println("borrowed,invalid-visitor-id;");
+            return "borrowed,invalid-visitor-id;";
         }
         else {
             ArrayList<CheckedBook> searchResults = new ArrayList<>();
@@ -42,13 +43,17 @@ public class BorrowedBooksSearch implements Command {
             }
             library.setBorrowedSearch(searchResults);
             library.setBorrowedSearchUser(id);
+            String returnString = "borrowed,"+searchResults.size();
             System.out.println("borrowed,"+searchResults.size());
             for(CheckedBook book :searchResults) {
                 GregorianCalendar checkOutDate = (GregorianCalendar) book.getDueDate().clone();
                 checkOutDate.add(Calendar.DAY_OF_MONTH,-7);
+                returnString=returnString+searchResults.indexOf(book)+1+","+book.getBook().getISBN()+"," +
+                        book.getBook().getTitle()+","+checkOutDate.getTime()+'\n';
                 System.out.println(searchResults.indexOf(book)+1+","+book.getBook().getISBN()+"," +
                         book.getBook().getTitle()+","+checkOutDate.getTime());
             }
+            return returnString;
 
         }
 

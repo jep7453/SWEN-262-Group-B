@@ -115,7 +115,7 @@ public class LibraryReport implements Command {
      * Command execute function
      * Prints out the statistics recorded by the library from the specified days
      */
-    public void execute(){
+    public String execute(){
         System.out.println(currentLibrary.getHistory().size());
         String reportString = "";
         reportString += getDateString();
@@ -129,5 +129,6 @@ public class LibraryReport implements Command {
 
 
         System.out.println(reportString);
+        return reportString;
     }
 }

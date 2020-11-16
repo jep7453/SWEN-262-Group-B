@@ -1,3 +1,5 @@
+package Input;
+
 import Command.*;
 import Library.Library;
 import Library.Day;
@@ -10,7 +12,7 @@ public class CommandInterpretter {
     private Day currentDay;
 
     /**
-     * Constructor for the CommandInterpretter Object
+     * Constructor for the Input.CommandInterpretter Object
      * @param startDay Day object the day LBMS is first run
      */
     public CommandInterpretter(Day startDay) {

@@ -27,7 +27,7 @@ public class PurchaseBook implements Command {
      * Command execute function
      * Adds books to the library catalog from the specified ID from the last BookStoreSearch
      */
-    public void execute() {
+    public String execute() {
         ArrayList<Book> bookLibrary = new ArrayList<>(library.getBookCollection().values());
         ArrayList<Book> bookStore = library.getStoreSearch();
         ArrayList<Book> purchased= new ArrayList<Book>();
@@ -39,8 +39,12 @@ public class PurchaseBook implements Command {
                 library.getBookCollection().put(storeBook.getTitle(),storeBook);
             }
         }
+        String returnSting ="purchase,success,"+purchased.size();
         System.out.println("purchase,success,"+purchased.size());
-        for(Book purchasedBook: purchased)
-            System.out.println(purchasedBook+","+ String.valueOf(quantity));
+        for(Book purchasedBook: purchased) {
+            returnSting = returnSting + purchasedBook + "," + String.valueOf(quantity)+ '\n';
+            System.out.println(purchasedBook + "," + String.valueOf(quantity));
+        }
+        return returnSting;
     }
 }

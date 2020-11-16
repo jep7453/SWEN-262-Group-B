@@ -58,7 +58,7 @@ public class AdvanceTime implements Command {
      * Command execute function
      * Sets the library current date to the advanced one, and accounts for overdue books and library closing
      */
-    public void execute(){
+    public String execute(){
         if(library.getPresentDate().get(Calendar.DAY_OF_MONTH)!=simulatedDate.get(Calendar.DAY_OF_MONTH)) {
             Day simulation = new Day(this.simulatedDate);
             library.setSimulatedTime(simulation);
@@ -79,7 +79,9 @@ public class AdvanceTime implements Command {
                 overdue++;
             }
         }
+        String returnString="Current Day:" + library.getPresentDate().getTime().toString()+'\n'+"Overdue Book Count: " + overdue + '\n';
         System.out.println("Current Day:" + library.getPresentDate().getTime().toString());
         System.out.println("Overdue Book Count: " + overdue + '\n');
+        return returnString;
     }
 }

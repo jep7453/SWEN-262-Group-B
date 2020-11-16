@@ -31,7 +31,7 @@ public class ReturnBook implements Command {
      * Command execute function
      * Returns checked out books for a user, adding any overdue fines to them
      */
-    public void execute() {
+    public String execute() {
         ArrayList<CheckedBook> borrowedSearch = library.getBorrowedSearchCache();
         ArrayList<CheckedBook> overDue = new ArrayList<>();
         ArrayList<Integer> overDueIDs = new ArrayList<>();
@@ -44,13 +44,17 @@ public class ReturnBook implements Command {
 
         if(!library.getRegisteredVisitors().containsKey(id)||id!= library.getBorrowedSearchUser()) {
             System.out.println("return,invalid-visitor-id;");
+            return "return,invalid-visitor-id";
         }
 
         else if(invalidBooks.size()!=0) {
+            String returnString ="return,invalid-book-id;";
             System.out.print("return,invalid-book-id;");
             for(Integer book: invalidBooks) {
+                returnString=returnString+"," +book;
                 System.out.print("," +book);
             }
+            return returnString;
         }
         else {
             for (Integer book : books) {
@@ -65,8 +69,10 @@ public class ReturnBook implements Command {
                 library.getRentedBooks().remove(borrowedBook);
                 library.getRegisteredVisitors().get(id).removeBorrowedBooks(1);
             }
-            if(overDue.size()==0)
+            if(overDue.size()==0) {
                 System.out.println("return,success;");
+                return "return,success;";
+            }
             else {
                 int fines = 0;
                 for(CheckedBook book : overDue) {
@@ -74,10 +80,13 @@ public class ReturnBook implements Command {
                     fines+=book.getFine();
                     visitor.returnedFinedBook(book.getFine());
                 }
+                String returnString = "return,overdue,"+fines;
                 System.out.print("return,overdue,"+fines);
                 for(Integer book: overDueIDs) {
                     System.out.print("," +book);
+                    returnString=returnString+"," +book;
                 }
+                return returnString;
             }
         }
 
