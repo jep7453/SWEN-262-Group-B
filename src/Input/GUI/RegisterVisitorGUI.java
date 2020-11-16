@@ -29,15 +29,15 @@ public class RegisterVisitorGUI {
         this.interpretter = interpretter;
     }
 
-    public GridPane newVisitorGrid() {
+    public GridPane registerVisitorGrid() {
         GridPane outputGridPane = gridPane;
         gridPane.getChildren().clear();
 
-        Button backToHome = new Button("Return to command page");
-        backToHome.setOnAction(new EventHandler<ActionEvent>() {
+        Button commandPage = new Button("Return to command page");
+        commandPage.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                GUILMBS.mainPage(outputGridPane, library, interpretter);
+                GUILMBS.commandDisplay(outputGridPane, library, interpretter);
             }
         });
 
@@ -73,7 +73,7 @@ public class RegisterVisitorGUI {
 
 
 
-        outputGridPane.add(backToHome, 0, 0);
+        outputGridPane.add(commandPage, 0, 0);
         outputGridPane.add(firstName, 0, 1);
         outputGridPane.add(firstNameValue, 1, 1);
         outputGridPane.add(lastName, 0, 2);

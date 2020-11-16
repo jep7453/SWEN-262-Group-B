@@ -10,10 +10,8 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
 import java.io.*;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -59,7 +57,7 @@ public class GUILMBS extends Application {
         CommandInterpretter commandInterpretter = new CommandInterpretter(startDayObv);
 
 
-        mainPage(gridPane,library,commandInterpretter);
+        commandDisplay(gridPane,library,commandInterpretter);
 
         root.getChildren().add(gridPane);
         Scene scene = new Scene(root, 600, 300);
@@ -69,7 +67,7 @@ public class GUILMBS extends Application {
         primaryStage.show();
     }
 
-    public static GridPane mainPage(GridPane gridPane,Library library,CommandInterpretter interpretter) {
+    public static GridPane commandDisplay(GridPane gridPane,Library library,CommandInterpretter interpretter) {
         gridPane.getChildren().clear();
         Label title = new Label("Library Book Management System");
 
@@ -84,109 +82,70 @@ public class GUILMBS extends Application {
             }
         });
         Button beginVisit = new Button("Begin Visit");
-        beginVisit.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                BeginVisitGUI beginVisitGUI = new BeginVisitGUI(gridPane,library,interpretter);
-                beginVisitGUI.beginVisitGridPane();
+        beginVisit.setOnAction(actionEvent -> {
+            BeginVisitGUI beginVisitGUI = new BeginVisitGUI(gridPane,library,interpretter);
+            beginVisitGUI.beginVisitGridPane();
 
-            }
         });
         Button libraryBookSearch = new Button("Library Book Search");
-        libraryBookSearch.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                LibraryBookSearchGUI libraryBookSearchGUI = new LibraryBookSearchGUI(gridPane,library,interpretter);
-                libraryBookSearchGUI.libraryBookSearchGridPane();
-            }
+        libraryBookSearch.setOnAction(actionEvent -> {
+            LibraryBookSearchGUI libraryBookSearchGUI = new LibraryBookSearchGUI(gridPane,library,interpretter);
+            libraryBookSearchGUI.libraryBookSearchGridPane();
         });
         Button borrowBook = new Button("Borrow Book");
-        borrowBook.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                BorrowBookGUI borrowBookGUI = new BorrowBookGUI(gridPane,library,interpretter);
-                borrowBookGUI.borrowBookGridPane();
-            }
+        borrowBook.setOnAction(actionEvent -> {
+            BorrowBookGUI borrowBookGUI = new BorrowBookGUI(gridPane,library,interpretter);
+            borrowBookGUI.borrowBookGridPane();
         });
         Button borrowedBooksSearch = new Button("Borrowed Books Search");
-        borrowedBooksSearch.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                BorrowedBooksSearchGUI borrowedBooksSearchGUI = new BorrowedBooksSearchGUI(gridPane,library,interpretter);
-                borrowedBooksSearchGUI.borrowedBooksSearchGridPane();
-            }
+        borrowedBooksSearch.setOnAction(actionEvent -> {
+            BorrowedBooksSearchGUI borrowedBooksSearchGUI = new BorrowedBooksSearchGUI(gridPane,library,interpretter);
+            borrowedBooksSearchGUI.borrowedBooksSearchGridPane();
         });
         Button currentDateTime = new Button("Current Date Time");
-        currentDateTime.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                CurrentDateTimeGUI currentDateTimeGUI = new CurrentDateTimeGUI(gridPane,library,interpretter);
-                currentDateTimeGUI.dateTimeGridPane();
-            }
+        currentDateTime.setOnAction(actionEvent -> {
+            CurrentDateTimeGUI currentDateTimeGUI = new CurrentDateTimeGUI(gridPane,library,interpretter);
+            currentDateTimeGUI.dateTimeGridPane();
         });
         Button endVisit = new Button("End Visit");
-        endVisit.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                EndVisitGUI endVisitGUI = new EndVisitGUI(gridPane,library,interpretter);
-                endVisitGUI.endVisitGridPane();
-            }
+        endVisit.setOnAction(actionEvent -> {
+            EndVisitGUI endVisitGUI = new EndVisitGUI(gridPane,library,interpretter);
+            endVisitGUI.endVisitGridPane();
         });
         Button newVisitor = new Button("Register Visitor");
-        newVisitor.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                RegisterVisitorGUI registerVisitorGUI = new RegisterVisitorGUI(gridPane,library,interpretter);
-                registerVisitorGUI.newVisitorGrid();
-            }
+        newVisitor.setOnAction(actionEvent -> {
+            RegisterVisitorGUI registerVisitorGUI = new RegisterVisitorGUI(gridPane,library,interpretter);
+            registerVisitorGUI.registerVisitorGrid();
         });
         Button payFine = new Button("Pay Fine");
-        payFine.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                PayFineGUI payFineGUI = new PayFineGUI(gridPane,library,interpretter);
-                payFineGUI.payFineGridPane();
-            }
+        payFine.setOnAction(actionEvent -> {
+            PayFineGUI payFineGUI = new PayFineGUI(gridPane,library,interpretter);
+            payFineGUI.payFineGridPane();
         });
         Button purchaseBook = new Button("Purchase Book");
-        purchaseBook.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                PurchaseBookGUI purchaseBookGUI = new PurchaseBookGUI(gridPane,library,interpretter);
-                purchaseBookGUI.purchaseBookGrid();
-            }
+        purchaseBook.setOnAction(actionEvent -> {
+            PurchaseBookGUI purchaseBookGUI = new PurchaseBookGUI(gridPane,library,interpretter);
+            purchaseBookGUI.purchaseBookGrid();
         });
         Button libraryReport = new Button("Library Report");
-        libraryReport.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                LibraryReportGUI libraryReportGUI = new LibraryReportGUI(gridPane,library,interpretter);
-                libraryReportGUI.libraryReportGridPane();
-            }
+        libraryReport.setOnAction(actionEvent -> {
+            LibraryReportGUI libraryReportGUI = new LibraryReportGUI(gridPane,library,interpretter);
+            libraryReportGUI.libraryReportGridPane();
         });
         Button returnBook = new Button("Return Book");
-        returnBook.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                ReturnBookGUI returnBookGUI = new ReturnBookGUI(gridPane,library,interpretter);
-                returnBookGUI.returnBookGridPane();
-            }
+        returnBook.setOnAction(actionEvent -> {
+            ReturnBookGUI returnBookGUI = new ReturnBookGUI(gridPane,library,interpretter);
+            returnBookGUI.returnBookGridPane();
         });
         Button bookStoreSearch = new Button("Store Search");
-        bookStoreSearch.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                BookStoreSearchGUI bookStoreSearchGUI = new BookStoreSearchGUI(gridPane,library,interpretter);
-                bookStoreSearchGUI.bookStoreSearchGridPane();
-            }
+        bookStoreSearch.setOnAction(actionEvent -> {
+            BookStoreSearchGUI bookStoreSearchGUI = new BookStoreSearchGUI(gridPane,library,interpretter);
+            bookStoreSearchGUI.bookStoreSearchGridPane();
         });
         Button quit = new Button("Quit");
-        quit.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                QuitGUI quitGUI = new QuitGUI(gridPane,library,interpretter);
-                quitGUI.quitGridPane();
-            }
+        quit.setOnAction(actionEvent -> {
+            QuitGUI quitGUI = new QuitGUI(gridPane,library,interpretter);
+            quitGUI.quitGridPane();
         });
 
 
