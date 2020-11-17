@@ -41,7 +41,8 @@ public class BeginVisitGUI {
 
         Label id = new Label("Visitor ID: ");
         TextArea idValue = new TextArea();
-        idValue.setPrefSize(200, 20);
+        idValue.setPrefWidth(300);
+        idValue.setPrefHeight(50);
 
         Label output = new Label("");
 

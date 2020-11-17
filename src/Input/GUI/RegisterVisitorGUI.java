@@ -43,19 +43,23 @@ public class RegisterVisitorGUI {
 
         Label firstName = new Label("First name: ");
         TextArea firstNameValue = new TextArea();
-        firstNameValue.setPrefSize(200, 20);
+        firstNameValue.setPrefWidth(300);
+        firstNameValue.setPrefHeight(50);
 
         Label lastName = new Label("Last name: ");
         TextArea lastNameValue = new TextArea();
-        lastNameValue.setPrefSize(200, 20);
+        lastNameValue.setPrefWidth(300);
+        lastNameValue.setPrefHeight(50);
 
         Label address = new Label("Address: ");
         TextArea addressValue = new TextArea();
         addressValue.setPrefSize(200, 10);
+        addressValue.setPrefHeight(50);
 
         Label phoneNumber = new Label("Phone number: ");
         TextArea phoneNumberValue = new TextArea();
-        phoneNumberValue.setPrefSize(200, 20);
+        phoneNumberValue.setPrefWidth(300);
+        phoneNumberValue.setPrefHeight(50);
 
         Label output = new Label("");
 

@@ -40,11 +40,13 @@ public class PurchaseBookGUI {
 
         Label quantity = new Label("Quantity: ");
         TextArea quantityValue = new TextArea();
-        quantityValue.setPrefSize(200, 20);
+        quantityValue.setPrefWidth(300);
+        quantityValue.setPrefHeight(50);
 
         Label ids = new Label("Book IDs (comma separated list if multiple): ");
         TextArea idsValue = new TextArea();
         idsValue.setPrefSize(200, 10);
+        idsValue.setPrefHeight(50);
 
         Label output = new Label("");
 

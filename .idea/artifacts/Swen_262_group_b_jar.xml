@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Swen-262-group-b:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Swen_262_group_b_jar</output-path>
+    <root id="archive" name="Swen-262-group-b.jar">
+      <element id="module-output" name="Swen-262-group-b" />
+    </root>
+  </artifact>
+</component>

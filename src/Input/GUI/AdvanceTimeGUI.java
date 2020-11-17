@@ -41,11 +41,13 @@ public class AdvanceTimeGUI {
 
         Label days = new Label("Days to advance: ");
         TextArea daysValue = new TextArea();
-        daysValue.setPrefSize(300 ,0);
+        daysValue.setPrefWidth(300);
+        daysValue.setPrefHeight(50);
 
         Label hours = new Label("Hours to advance: ");
         TextArea hoursValue = new TextArea();
-        hoursValue.setPrefSize(300,0);
+        hoursValue.setPrefWidth(300);
+        hoursValue.setPrefHeight(50);
 
         Label output = new Label("");
 

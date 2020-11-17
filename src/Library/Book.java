@@ -14,8 +14,6 @@ public class Book implements Serializable {
     private  int pages;
     private int copies;
     private int copiesAvailable;
-    private GregorianCalendar returnDate;
-
     /**
      * Constructor for book object
      * @param title
@@ -34,7 +32,6 @@ public class Book implements Serializable {
         this.pages=pages;
         this.copies=0;
         this.copiesAvailable=0;
-        this.returnDate = null;
     }
 
     /**

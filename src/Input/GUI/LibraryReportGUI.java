@@ -38,7 +38,8 @@ public class LibraryReportGUI {
 
         Label days = new Label("Days to report back to (leave blank for the start): ");
         TextArea daysValue = new TextArea();
-        daysValue.setPrefSize(200, 20);
+        daysValue.setPrefWidth(300);
+        daysValue.setPrefHeight(50);
 
         Label output = new Label("");
 

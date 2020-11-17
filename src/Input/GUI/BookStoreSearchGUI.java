@@ -44,23 +44,28 @@ public class BookStoreSearchGUI {
 
         Label title = new Label("Title: ");
         TextArea titleValue = new TextArea();
-        titleValue.setPrefSize(200, 20);
+        titleValue.setPrefWidth(300);
+        titleValue.setPrefHeight(50);
 
         Label authors = new Label("Authors (in brackets) (comma separated if multiple): ");
         TextArea authorsValue = new TextArea();
-        authorsValue.setPrefSize(200, 20);
+        authorsValue.setPrefWidth(300);
+        authorsValue.setPrefHeight(50);
 
         Label isbn = new Label("ISBN: ");
         TextArea isbnValue = new TextArea();
-        isbnValue.setPrefSize(200, 10);
+        isbnValue.setPrefWidth(300);
+        isbnValue.setPrefHeight(50);
 
         Label publisher = new Label("Publisher: ");
         TextArea publisherValue = new TextArea();
-        publisherValue.setPrefSize(200, 20);
+        publisherValue.setPrefWidth(300);
+        publisherValue.setPrefHeight(50);
 
         Label sortOrder = new Label("Sort Order: ");
         TextArea sortOrderValue = new TextArea();
-        sortOrderValue.setPrefSize(200, 20);
+        sortOrderValue.setPrefWidth(300);
+        sortOrderValue.setPrefHeight(50);
 
         Label output = new Label("");
 

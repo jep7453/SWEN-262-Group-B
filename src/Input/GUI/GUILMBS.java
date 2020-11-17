@@ -60,7 +60,7 @@ public class GUILMBS extends Application {
         commandDisplay(gridPane,library,commandInterpretter);
 
         root.getChildren().add(gridPane);
-        Scene scene = new Scene(root, 600, 300);
+        Scene scene = new Scene(root, 800, 400);
 
         primaryStage.setTitle("Library Book Management System");
         primaryStage.setScene(scene);
@@ -112,8 +112,8 @@ public class GUILMBS extends Application {
             EndVisitGUI endVisitGUI = new EndVisitGUI(gridPane,library,interpretter);
             endVisitGUI.endVisitGridPane();
         });
-        Button newVisitor = new Button("Register Visitor");
-        newVisitor.setOnAction(actionEvent -> {
+        Button registerVisitor = new Button("Register Visitor");
+        registerVisitor.setOnAction(actionEvent -> {
             RegisterVisitorGUI registerVisitorGUI = new RegisterVisitorGUI(gridPane,library,interpretter);
             registerVisitorGUI.registerVisitorGrid();
         });
@@ -161,7 +161,7 @@ public class GUILMBS extends Application {
         gridPane.add(payFine, 2, 4);
         gridPane.add(purchaseBook, 2, 5);
         gridPane.add(quit, 2, 6);
-        gridPane.add(newVisitor, 3, 2);
+        gridPane.add(registerVisitor, 3, 2);
         gridPane.add(endVisit, 3, 3);
         gridPane.add(borrowBook, 3, 4);
         gridPane.add(bookStoreSearch, 3, 5);

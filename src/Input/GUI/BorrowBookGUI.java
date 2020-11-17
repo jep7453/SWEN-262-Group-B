@@ -41,12 +41,13 @@ public class BorrowBookGUI {
 
         Label id = new Label("Visitor ID: ");
         TextArea idValue = new TextArea();
-        idValue.setPrefSize(200, 20);
+        idValue.setPrefWidth(300);
+        idValue.setPrefHeight(50);
 
         Label ids = new Label("Book IDs (comma separated list if multiple): ");
         TextArea idsValue = new TextArea();
-        idsValue.setPrefSize(200, 20);
-
+        idsValue.setPrefWidth(300);
+        idsValue.setPrefHeight(50);
         Label output = new Label("");
 
         Button submit = new Button("Submit");
