@@ -17,7 +17,6 @@ import java.io.ObjectOutputStream;
 public class ReturnBookGUI {
     GridPane gridPane;
     Library library;
-    String quantityString;
     String idString;
     String idsString;
     CommandInterpretter interpretter;
@@ -39,10 +38,6 @@ public class ReturnBookGUI {
             }
         });
 
-        Label quantity = new Label("Quantity: ");
-        TextArea quantityValue = new TextArea();
-        quantityValue.setPrefSize(200, 20);
-
         Label id = new Label("Visitor ID: ");
         TextArea idValue = new TextArea();
         idValue.setPrefSize(200, 20);
@@ -57,7 +52,6 @@ public class ReturnBookGUI {
         submit.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                quantityString = quantityValue.getText();
                 idString = idValue.getText();
                 idsString = idsValue.getText();
                 handleReturnBook(output);
@@ -67,20 +61,18 @@ public class ReturnBookGUI {
 
 
         outputGridPane.add(commandPage, 0, 0);
-        outputGridPane.add(quantity, 0, 1);
-        outputGridPane.add(quantityValue, 1, 1);
-        outputGridPane.add(id, 0, 2);
-        outputGridPane.add(idValue, 1, 2);
-        outputGridPane.add(ids, 0, 3);
-        outputGridPane.add(idsValue, 1, 3);
-        outputGridPane.add(submit, 0, 4);
-        outputGridPane.add(output, 0, 5);
+        outputGridPane.add(id, 0, 1);
+        outputGridPane.add(idValue, 1, 1);
+        outputGridPane.add(ids, 0, 2);
+        outputGridPane.add(idsValue, 1, 2);
+        outputGridPane.add(submit, 0, 3);
+        outputGridPane.add(output, 0, 4);
 
         return outputGridPane;
     }
 
     public void handleReturnBook(Label output) {
-        String request = "return" + ',' + quantityString + ',' + idString + ',' + idsString + ';';
+        String request = "return" + ',' + idString + ',' + idsString + ';';
         Command command = interpretter.interpret(library, request);
         output.setText(command.execute());
         FileOutputStream fileOutputStream;

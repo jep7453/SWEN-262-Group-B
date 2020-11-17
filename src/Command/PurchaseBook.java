@@ -39,7 +39,7 @@ public class PurchaseBook implements Command {
                 library.getBookCollection().put(storeBook.getTitle(),storeBook);
             }
         }
-        String returnSting ="purchase,success,"+purchased.size();
+        String returnSting ="purchase,success,"+purchased.size()+'\n';
         System.out.println("purchase,success,"+purchased.size());
         for(Book purchasedBook: purchased) {
             returnSting = returnSting + purchasedBook + "," + String.valueOf(quantity)+ '\n';

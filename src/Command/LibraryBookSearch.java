@@ -71,9 +71,9 @@ public class LibraryBookSearch implements Command {
         }
         library.setLibrarySearch(searchResults);
         System.out.println("info,"+searchResults.size());
-        String returnString = "info,"+searchResults.size();
+        String returnString = "info,"+searchResults.size() +"\n";
         for(Book foundBook: searchResults) {
-            returnString = returnString + searchResults.indexOf(foundBook) + 1 + "," + Integer.valueOf(foundBook.getCopiesAvailable()) + "," + foundBook + '\n';
+            returnString = returnString +( searchResults.indexOf(foundBook) + 1) + "," + Integer.valueOf(foundBook.getCopiesAvailable()) + "," + foundBook + '\n';
             System.out.println(searchResults.indexOf(foundBook) + 1 + "," + Integer.valueOf(foundBook.getCopiesAvailable()) + "," + foundBook);
         }
         return returnString;

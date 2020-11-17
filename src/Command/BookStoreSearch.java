@@ -66,10 +66,10 @@ public class BookStoreSearch implements Command {
                     searchResults = strategy.sort(searchResults);
             }
             library.setStoreSearch(searchResults);
-            String returnString = "search,"+searchResults.size();
+            String returnString = "search,"+searchResults.size()+"\n";
             System.out.println("search,"+searchResults.size());
             for(Book foundBook: searchResults) {
-                returnString = returnString + searchResults.indexOf(foundBook) + 1 + "," + foundBook + '\n';
+                returnString = returnString + (searchResults.indexOf(foundBook) + 1) + "," + foundBook + '\n';
                 System.out.println(searchResults.indexOf(foundBook) + 1 + "," + foundBook);
             }
             return returnString;
