@@ -65,7 +65,7 @@ public class BorrowedBooksSearchGUI {
     }
 
     public void handleBorrowedBookSearch(Label output) {
-        String request = "borrow" + ',' + idString + ';';
+        String request = "borrowed" + ',' + idString + ';';
         Command command = interpretter.interpret(library, request);
         output.setText(command.execute());
         FileOutputStream fileOutputStream;
